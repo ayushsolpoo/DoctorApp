@@ -1,0 +1,18 @@
+//
+//  DoctorApp.pch
+//  DoctorApp
+//
+//  Created by MacPro on 21/04/17.
+//  Copyright © 2017 MacPro. All rights reserved.
+//
+
+#ifndef DoctorApp_pch
+#define DoctorApp_pch
+
+#import "Constant.h"
+#import "SVProgressHUD.h"
+#import "NetworkManager.h"
+#import "DAGlobal.h"
+
+
+#endif /* DoctorApp_pch */
