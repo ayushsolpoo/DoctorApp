@@ -10,6 +10,7 @@
 #define Constant_h
 
 /* Web Services */
+//URLS
 
 #define BASE_URL                     @"http://182.73.229.226/api/v1/patient/"
 
