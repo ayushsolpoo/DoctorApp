@@ -333,7 +333,7 @@
 				8EF713A41EAE0B96005F8649 /* Utilities */,
 				8E36C1DE1EADC58B0092E9D9 /* Category */,
 				129067401EAB8D2A00C9A04B /* Third Party Classec */,
-				8E4A54991EAA00AE00AC9A0E /* Sroryboard */,
+				8E4A54991EAA00AE00AC9A0E /* StoryBoard */,
 				8E4A548B1EA9DE3600AC9A0E /* Resources */,
 				8E38724B1EA8EE4B008DDB3B /* Dummy Images */,
 				8E3872101EA8C18C008DDB3B /* AppDelegate */,
@@ -564,13 +564,14 @@
 			path = DAEmergencySelectedContactVC;
 			sourceTree = "<group>";
 		};
-		8E4A54991EAA00AE00AC9A0E /* Sroryboard */ = {
+		8E4A54991EAA00AE00AC9A0E /* StoryBoard */ = {
 			isa = PBXGroup;
 			children = (
 				8E38719F1EA8B804008DDB3B /* Main.storyboard */,
 				8E3872441EA8D2ED008DDB3B /* Appointment.storyboard */,
 				8E3871A71EA8B804008DDB3B /* LaunchScreen.storyboard */,
 			);
+			name = StoryBoard;
 			path = Sroryboard;
 			sourceTree = "<group>";
 		};
