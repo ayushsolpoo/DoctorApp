@@ -32,7 +32,7 @@
     slideImageSetArray = [[NSMutableArray alloc]initWithObjects:@"image1",@"image2",@"image3",nil];
     
     // TODO: SET PAGE CONTROL ATTRIBUTE
-    
+    NSLog(@"");
 
 }
 -(void)viewWillAppear:(BOOL)animated
