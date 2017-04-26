@@ -12,6 +12,7 @@
 #import "AppDelegate.h"
 #import "MMDrawerController.h"
 #import "DAHomeCCell.h"
+#import "DAReminderVC.h"
 
 @interface DAHomeVC ()<UICollectionViewDelegate,UICollectionViewDataSource>
 {
@@ -104,7 +105,13 @@
 
 - (IBAction)reminderBtnPressed:(id)sender
 {
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Reminder" bundle:nil];
+    DAReminderVC *vc = [sb instantiateViewControllerWithIdentifier:@"DAReminderListVC"];
+//    vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+   [self.navigationController showViewController:vc sender:self];
     
+//    DAReminderVC *bokApVc = [self.storyboard instantiateViewControllerWithIdentifier:@"DAAppointmentListVC"];
+//    [self.navigationController showViewController:bokApVc sender:self];
 }
 - (IBAction)sosBtnPressed:(id)sender
 {

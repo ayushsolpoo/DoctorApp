@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DAReminderVC : UIViewController
+@interface DAReminderVC : UIViewController<UITableViewDelegate,UITableViewDataSource>
 
 @end

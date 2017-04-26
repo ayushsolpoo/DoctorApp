@@ -17,6 +17,8 @@
 		12EA25181EACA60C00D44609 /* DALeftSubVC1.m in Sources */ = {isa = PBXBuildFile; fileRef = 12EA25171EACA60C00D44609 /* DALeftSubVC1.m */; };
 		167E39BF5D0FFF87470BCF3F /* libPods-DoctorAppUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 54EACD62011DEEB6B8332080 /* libPods-DoctorAppUITests.a */; };
 		2366BC96C3D53DDA0D2B173D /* libPods-DoctorApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C28E6E24B8ADD42FDC14E7D /* libPods-DoctorApp.a */; };
+		5200B7751EB0BA5A006119F7 /* Reminder.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5200B7741EB0BA5A006119F7 /* Reminder.storyboard */; };
+		5200B7771EB0D0BC006119F7 /* DAReminderCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5200B7761EB0D0BC006119F7 /* DAReminderCustomCell.xib */; };
 		8E36C1E21EADC5D60092E9D9 /* UITextField+Padding.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E36C1E11EADC5D60092E9D9 /* UITextField+Padding.m */; };
 		8E3871981EA8B804008DDB3B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3871971EA8B804008DDB3B /* main.m */; };
 		8E3871A11EA8B804008DDB3B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E38719F1EA8B804008DDB3B /* Main.storyboard */; };
@@ -99,6 +101,8 @@
 		12EA25161EACA60C00D44609 /* DALeftSubVC1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DALeftSubVC1.h; sourceTree = "<group>"; };
 		12EA25171EACA60C00D44609 /* DALeftSubVC1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DALeftSubVC1.m; sourceTree = "<group>"; };
 		4FCBB5A828E4468910B78146 /* Pods-DoctorApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DoctorApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-DoctorApp/Pods-DoctorApp.release.xcconfig"; sourceTree = "<group>"; };
+		5200B7741EB0BA5A006119F7 /* Reminder.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Reminder.storyboard; sourceTree = "<group>"; };
+		5200B7761EB0D0BC006119F7 /* DAReminderCustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DAReminderCustomCell.xib; sourceTree = "<group>"; };
 		54EACD62011DEEB6B8332080 /* libPods-DoctorAppUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DoctorAppUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B5FE148CDE05A05B5049383 /* Pods-DoctorAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DoctorAppUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DoctorAppUITests/Pods-DoctorAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		8C28E6E24B8ADD42FDC14E7D /* libPods-DoctorApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DoctorApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -438,6 +442,7 @@
 			children = (
 				8E38721A1EA8C1CA008DDB3B /* DAReminderVC.h */,
 				8E38721B1EA8C1CA008DDB3B /* DAReminderVC.m */,
+				5200B7761EB0D0BC006119F7 /* DAReminderCustomCell.xib */,
 			);
 			path = DAReminderVC;
 			sourceTree = "<group>";
@@ -570,6 +575,7 @@
 				8E38719F1EA8B804008DDB3B /* Main.storyboard */,
 				8E3872441EA8D2ED008DDB3B /* Appointment.storyboard */,
 				8E3871A71EA8B804008DDB3B /* LaunchScreen.storyboard */,
+				5200B7741EB0BA5A006119F7 /* Reminder.storyboard */,
 			);
 			name = StoryBoard;
 			path = Sroryboard;
@@ -778,7 +784,9 @@
 				8E3872451EA8D2ED008DDB3B /* Appointment.storyboard in Resources */,
 				8E3871A91EA8B804008DDB3B /* LaunchScreen.storyboard in Resources */,
 				8E3871A61EA8B804008DDB3B /* Assets.xcassets in Resources */,
+				5200B7751EB0BA5A006119F7 /* Reminder.storyboard in Resources */,
 				8E4A54891EA9CAF800AC9A0E /* profile1.png in Resources */,
+				5200B7771EB0D0BC006119F7 /* DAReminderCustomCell.xib in Resources */,
 				8E4A548A1EA9CAF800AC9A0E /* Profile2.jpeg in Resources */,
 				8E3871A11EA8B804008DDB3B /* Main.storyboard in Resources */,
 			);
@@ -1148,6 +1156,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = /Users/macbookpro/DoctorApp/DoctorApp/Resources/DoctorApp.pch;
 				INFOPLIST_FILE = DoctorApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.solpoo.DoctorApp;
@@ -1163,6 +1172,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = /Users/macbookpro/DoctorApp/DoctorApp/Resources/DoctorApp.pch;
 				INFOPLIST_FILE = DoctorApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.solpoo.DoctorApp;
