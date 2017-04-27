@@ -10,7 +10,9 @@
 #import "DASignUpVC.h"
 #import "DASignUpVC.h"
 #import "DAEmergencyContactsVC.h"
-
+#import "FacebookHelper.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @property (weak, nonatomic) IBOutlet UITextField *pasTextField;
@@ -24,7 +26,26 @@
     [super viewDidLoad];
     
 }
-
+#pragma mark : Log in with facebook
+-(void)fbButtonClicked{
+   //  [SVProgressHUD show];
+    [[FacebookHelper sharedInstance] loginFacebookFromSettings:@"id,email,name,gender,picture.type(large)" Completion:^(NSDictionary *response, BOOL isCancelled)
+     {
+       //  [SVProgressHUD dismiss];
+         if (response)
+         {
+             NSLog(@"%@",response);
+//             self.fbDict = response;
+//             NSUserDefaults* save = [NSUserDefaults standardUserDefaults];
+//             [save setObject:[response objectForKey:@"name"] forKey:@"name"];
+//             [save setObject:[response objectForKey:@"email"]?[response objectForKey:@"email"]:@"" forKey:@"email"];
+//            [save synchronize];
+            // [self loginApi];
+         }
+     }];
+    
+    
+}
 #pragma mark textfield delegate methods
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -74,7 +95,8 @@
 {
     [SVProgressHUD show];
     NSString * urlString = [NSString stringWithFormat:@"%@%@",BASE_URL,LOGIN];
-    NSDictionary * paramDict = @{@"email":[NSString stringWithFormat:@"%@",_emailTextField.text],@"password":[NSString stringWithFormat:@"%@",_pasTextField.text]};
+    NSDictionary * paramDict = @{@"email":[NSString stringWithFormat:@"%@",_emailTextField.text],@"password":[NSString stringWithFormat:@"%@",_pasTextField.text],@"device_token":@"78374646",@"registration_token":@"4345455"};
+    //device_token,registration_token
     
     [[NetworkManager sharedManager] requestApiWithName:urlString requestType:kHTTPMethodPOST postData:paramDict callBackBlock:^(id response, NSError *error)
      {
@@ -170,15 +192,16 @@
 }
 
 - (IBAction)loginWithFbBtnPressed:(id)sender {
+    [self fbButtonClicked];
 }
 
 - (IBAction)newUserBtnPressed:(id)sender
 {
-//    DASignUpVC *signUp = [self.storyboard instantiateViewControllerWithIdentifier:@"DASignUpVC"];
-//    [self.navigationController showViewController:signUp sender:self];
-    
-    DAEmergencyContactsVC *signUp = [self.storyboard instantiateViewControllerWithIdentifier:@"DAEmergencyContactsVC"];
+    DASignUpVC *signUp = [self.storyboard instantiateViewControllerWithIdentifier:@"DASignUpVC"];
     [self.navigationController showViewController:signUp sender:self];
+    
+//    DAEmergencyContactsVC *signUp = [self.storyboard instantiateViewControllerWithIdentifier:@"DAEmergencyContactsVC"];
+//    [self.navigationController showViewController:signUp sender:self];
 
 }
 

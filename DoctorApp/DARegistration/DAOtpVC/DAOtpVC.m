@@ -93,6 +93,10 @@
 - (IBAction)verifyBtnPressed:(id)sender
 {
     [SVProgressHUD show];
+    DAEmergencyContactsVC *eVC = [self.storyboard instantiateViewControllerWithIdentifier:@"DAEmergencyContactsVC"];
+    [self.navigationController showViewController:eVC sender:self];
+
+    return;
     NSString *urlString = [NSString stringWithFormat:@"%@%@",BASE_URL,OTP_VERIFICATION];
     NSString *otp = [NSString stringWithFormat:@"%@%@%@%@",_firstDigit.text,_secondDigit.text,_thirsDigit.text,_forthDigit.text];
     NSMutableDictionary *paramDict = [[NSMutableDictionary alloc]initWithObjectsAndKeys:@"123",@"patient_id",[otp intValue],@"otp", nil];

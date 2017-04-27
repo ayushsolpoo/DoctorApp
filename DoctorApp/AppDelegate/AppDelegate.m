@@ -11,7 +11,7 @@
 #import "DASignUpVC.h"
 #import "DALeftSideVC.h"
 #import "DARighMenuVC.h"
-
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 @interface AppDelegate ()
 
@@ -25,19 +25,19 @@
     
     
     [Fabric with:@[[Crashlytics class]]];
-    
+     [FBSDKAppEvents activateApp];
     // Configure tracker from GoogleService-Info.plist.
     NSError *configureError;
-    [[GGLContext sharedInstance] configureWithError:&configureError];
-    NSAssert(!configureError, @"Error configuring Google services: %@", configureError);
-    
-    // Optional: configure GAI options.
-    GAI *gai = [GAI sharedInstance];
-    gai.trackUncaughtExceptions = YES;  // report uncaught exceptions
-    gai.logger.logLevel = kGAILogLevelVerbose;  // remove before app release
-    
-    [self showHomeScreen];
-   // [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"DASignUpVC"];
+//    [[GGLContext sharedInstance] configureWithError:&configureError];
+//    NSAssert(!configureError, @"Error configuring Google services: %@", configureError);
+//    
+//    // Optional: configure GAI options.
+//    GAI *gai = [GAI sharedInstance];
+//    gai.trackUncaughtExceptions = YES;  // report uncaught exceptions
+//    gai.logger.logLevel = kGAILogLevelVerbose;  // remove before app release
+  //  [self showLogin];
+  //  [self showHomeScreen];
+  //  [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"DASignUpVC"];
     
     return YES;
 }

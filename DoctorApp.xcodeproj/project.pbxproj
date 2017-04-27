@@ -19,6 +19,8 @@
 		2366BC96C3D53DDA0D2B173D /* libPods-DoctorApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C28E6E24B8ADD42FDC14E7D /* libPods-DoctorApp.a */; };
 		5200B7751EB0BA5A006119F7 /* Reminder.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5200B7741EB0BA5A006119F7 /* Reminder.storyboard */; };
 		5200B7771EB0D0BC006119F7 /* DAReminderCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5200B7761EB0D0BC006119F7 /* DAReminderCustomCell.xib */; };
+		5200B77F1EB1CA10006119F7 /* FacebookHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5200B77E1EB1CA10006119F7 /* FacebookHelper.m */; };
+		5200B7811EB1CF5A006119F7 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5200B7801EB1CF5A006119F7 /* FacebookSDK.framework */; };
 		8E36C1E21EADC5D60092E9D9 /* UITextField+Padding.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E36C1E11EADC5D60092E9D9 /* UITextField+Padding.m */; };
 		8E3871981EA8B804008DDB3B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3871971EA8B804008DDB3B /* main.m */; };
 		8E3871A11EA8B804008DDB3B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E38719F1EA8B804008DDB3B /* Main.storyboard */; };
@@ -103,6 +105,9 @@
 		4FCBB5A828E4468910B78146 /* Pods-DoctorApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DoctorApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-DoctorApp/Pods-DoctorApp.release.xcconfig"; sourceTree = "<group>"; };
 		5200B7741EB0BA5A006119F7 /* Reminder.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Reminder.storyboard; sourceTree = "<group>"; };
 		5200B7761EB0D0BC006119F7 /* DAReminderCustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DAReminderCustomCell.xib; sourceTree = "<group>"; };
+		5200B77D1EB1CA10006119F7 /* FacebookHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookHelper.h; sourceTree = "<group>"; };
+		5200B77E1EB1CA10006119F7 /* FacebookHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookHelper.m; sourceTree = "<group>"; };
+		5200B7801EB1CF5A006119F7 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = "DoctorApp/Third Party Classec/FacebookHelper/FacebookSDK.framework"; sourceTree = "<group>"; };
 		54EACD62011DEEB6B8332080 /* libPods-DoctorAppUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DoctorAppUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B5FE148CDE05A05B5049383 /* Pods-DoctorAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DoctorAppUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DoctorAppUITests/Pods-DoctorAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		8C28E6E24B8ADD42FDC14E7D /* libPods-DoctorApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DoctorApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -200,6 +205,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5200B7811EB1CF5A006119F7 /* FacebookSDK.framework in Frameworks */,
 				8EF132501EAA1AD000C7F57F /* AddressBook.framework in Frameworks */,
 				8EF132511EAA1AD000C7F57F /* AddressBookUI.framework in Frameworks */,
 				2366BC96C3D53DDA0D2B173D /* libPods-DoctorApp.a in Frameworks */,
@@ -247,6 +253,7 @@
 			isa = PBXGroup;
 			children = (
 				8EF713801EADFF3B005F8649 /* SVProgressHud */,
+				5200B77C1EB1CA10006119F7 /* FacebookHelper */,
 				129067411EAB8D4A00C9A04B /* MMDrawerVC */,
 			);
 			path = "Third Party Classec";
@@ -275,6 +282,15 @@
 				12EA25171EACA60C00D44609 /* DALeftSubVC1.m */,
 			);
 			path = DALeftSubVC;
+			sourceTree = "<group>";
+		};
+		5200B77C1EB1CA10006119F7 /* FacebookHelper */ = {
+			isa = PBXGroup;
+			children = (
+				5200B77D1EB1CA10006119F7 /* FacebookHelper.h */,
+				5200B77E1EB1CA10006119F7 /* FacebookHelper.m */,
+			);
+			path = FacebookHelper;
 			sourceTree = "<group>";
 		};
 		797244095D8DBC53FDE06CE4 /* Pods */ = {
@@ -593,6 +609,7 @@
 		8EF1324D1EAA1ACF00C7F57F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5200B7801EB1CF5A006119F7 /* FacebookSDK.framework */,
 				8EF1324E1EAA1AD000C7F57F /* AddressBook.framework */,
 				8EF1324F1EAA1AD000C7F57F /* AddressBookUI.framework */,
 				8C28E6E24B8ADD42FDC14E7D /* libPods-DoctorApp.a */,
@@ -969,6 +986,7 @@
 				8E38721F1EA8C1D8008DDB3B /* DASosVC.m in Sources */,
 				1290674B1EAB8D6700C9A04B /* MMDrawerBarButtonItem.m in Sources */,
 				1290674C1EAB8D6700C9A04B /* MMDrawerController.m in Sources */,
+				5200B77F1EB1CA10006119F7 /* FacebookHelper.m in Sources */,
 				12EA25181EACA60C00D44609 /* DALeftSubVC1.m in Sources */,
 				8EF713B21EAE0B96005F8649 /* README.md in Sources */,
 				8EF713B01EAE0B96005F8649 /* NSData+CommonCrypto.m in Sources */,
@@ -1154,6 +1172,10 @@
 			baseConfigurationReference = FD7F4F16AE855BF6E2EE01E3 /* Pods-DoctorApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DoctorApp/Third\\ Party\\ Classec/FacebookHelper",
+				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = /Users/macbookpro/DoctorApp/DoctorApp/Resources/DoctorApp.pch;
@@ -1170,6 +1192,10 @@
 			baseConfigurationReference = 4FCBB5A828E4468910B78146 /* Pods-DoctorApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DoctorApp/Third\\ Party\\ Classec/FacebookHelper",
+				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = /Users/macbookpro/DoctorApp/DoctorApp/Resources/DoctorApp.pch;

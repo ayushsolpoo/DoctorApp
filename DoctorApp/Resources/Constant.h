@@ -18,7 +18,7 @@
 #define REGISTRATION                 @"register"
 #define OTP_VERIFICATION             @"patient/otp/verification"
 #define SAVE_EMERGENCY_CONTACTS      @"patient/register/emergency-contact"
-#define GET_APPOINTMENT_LIST         @"patient/appointment-list"
+#define GET_APPOINTMENT_LIST         @"appointment-list"
 
 
 
@@ -29,6 +29,6 @@
 #define INFO                  @"Information!"
 #define CONGRATULATION        @"Congratulation"
 #define SAVED_CONTACTS        @"You have successfully saved the selected contacts."
-
+#define kAppName              @"DoctorApp"
 
 #endif /* Constant_h */

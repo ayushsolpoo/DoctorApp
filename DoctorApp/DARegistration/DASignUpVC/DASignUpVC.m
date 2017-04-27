@@ -128,7 +128,7 @@ bool keyboardIsShown = false;
 {
     [SVProgressHUD show];
     NSString * urlString = [NSString stringWithFormat:@"%@%@",BASE_URL,REGISTRATION];
-    NSDictionary * paramDict = @{@"email":[NSString stringWithFormat:@"%@",_textFieldEmail.text],@"password":[NSString stringWithFormat:@"%@",_textFieldName.text],@"name":[NSString stringWithFormat:@"%@",_textFieldPas.text],@"number":[NSString stringWithFormat:@"%@",_textFieldMobileNo.text],@"doctor_id":@"123456789"};
+    NSDictionary * paramDict = @{@"email":[NSString stringWithFormat:@"%@",_textFieldEmail.text],@"password":[NSString stringWithFormat:@"%@",_textFieldPas.text],@"name":[NSString stringWithFormat:@"%@",_textFieldName.text],@"number":[NSString stringWithFormat:@"%@",_textFieldMobileNo.text],@"doctor_id":@"123456789"};
     
     [[NetworkManager sharedManager] requestApiWithName:urlString requestType:kHTTPMethodPOST postData:paramDict callBackBlock:^(id response, NSError *error)
      {

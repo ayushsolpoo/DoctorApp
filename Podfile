@@ -7,6 +7,9 @@ pod 'Reachability'
 pod 'AFNetworking'
 pod 'Fabric'
 pod 'Crashlytics'
+pod 'FBSDKCoreKit'
+pod 'FBSDKLoginKit'
+pod 'FBSDKShareKit'
 pod 'Google/Analytics'
   # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
   # use_frameworks!

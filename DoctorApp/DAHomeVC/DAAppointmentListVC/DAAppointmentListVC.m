@@ -31,6 +31,9 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *appointmentListTableView;
 
+@property (weak, nonatomic) IBOutlet UIButton *backBtnTapped;
+@property (weak, nonatomic) IBOutlet UIButton *AddBtnTapped;
+- (IBAction)BackBtnTapped:(id)sender;
 
 @end
 
@@ -38,7 +41,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [[self navigationController] setNavigationBarHidden:YES animated:YES];
     appointmentArray = [[NSMutableArray alloc]initWithCapacity:0];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
@@ -51,17 +54,29 @@
 -(void)getAppointmentList{
   
     [SVProgressHUD show];
-    NSString *urlString = [NSString stringWithFormat:@"%@%@",BASE_URL,GET_APPOINTMENT_LIST];
+    NSString *urlString = [NSString stringWithFormat:@"%@%@?api_token=%@",BASE_URL,GET_APPOINTMENT_LIST,@"PUmvc65KlvuVskKZYUzBFxYxkHe4G7TbRHOWGW5E8NtopgqZIACkeDIGaRqK"];
     [[NetworkManager sharedManager] requestApiWithName:urlString requestType:kHTTPMethodGET postData:nil callBackBlock:^(id response, NSError *error) {
         
         [SVProgressHUD dismiss];
         if (response)
         {
+            NSError *error;
+            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:response options:0 error:&error];
             
+            if (!jsonData)
+            {
+                
+            }
+            else
+            {
+                NSString *JSONString = [[NSString alloc] initWithBytes:[jsonData bytes] length:[jsonData length] encoding:NSUTF8StringEncoding];
+                NSLog(@"%@",JSONString);
+            }
+
             NSDictionary *responseDict = [[NSMutableDictionary alloc]initWithDictionary:response];
             if (![[responseDict objectForKey:@"error"] intValue])
             {
-                appointmentArray = [DAGlobal checkNullArray:[responseDict objectForKey:@"appoint_ment_list"]];
+                appointmentArray = [DAGlobal checkNullArray:[[[responseDict objectForKey:@"data"] objectAtIndex:0] objectForKey:@"appoint_ment_list"]];
                                    [_appointmentListTableView reloadData];
             }
         }
@@ -83,12 +98,20 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     DAAppointmentTableViewcell *cell = [tableView dequeueReusableCellWithIdentifier:@"AppointmentTableViewCell"];
+    [cell.lblDoctorName setText:[[[[appointmentArray  objectAtIndex:indexPath.row] objectForKey:@"patient_appoint_ment_slot"] objectForKey:@"patient_appointment_clinic"] objectForKey:@"clinicName"]];
+
+    [cell.lblDiesesName setText:[[[[appointmentArray  objectAtIndex:indexPath.row] objectForKey:@"patient_appoint_ment_slot"] objectForKey:@"patient_appointment_clinic"] objectForKey:@"landMark"]];
     
-    [cell.lblDoctorName setText:[[[appointmentArray  valueForKey:@"data"] objectAtIndex:indexPath.row]valueForKey:@"name"]];
-    [cell.lblDiesesName setText:[[[appointmentArray  valueForKey:@"data"]objectAtIndex:indexPath.row] valueForKey:@"number"]];
-    [cell.lblTimeSlot setText:[[[[[appointmentArray  valueForKey:@"data"]objectAtIndex:indexPath.row] valueForKey:@"appoint_ment_list"] objectAtIndex:0] valueForKey:@"appt_date"]];
+
+//    [cell.lblDoctorName setText:[[[appointmentArray  valueForKey:@"data"] objectAtIndex:indexPath.row]valueForKey:@"name"]];
+//    [cell.lblDiesesName setText:[[[appointmentArray  valueForKey:@"data"]objectAtIndex:indexPath.row] valueForKey:@"number"]];
+//    [cell.lblTimeSlot setText:[[[[[appointmentArray  valueForKey:@"data"]objectAtIndex:indexPath.row] valueForKey:@"appoint_ment_list"] objectAtIndex:0] valueForKey:@"appt_date"]];
     return cell;
     
 }
-
+//TODO:Outlets
+- (IBAction)BackBtnTapped:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 @end
