@@ -7,7 +7,7 @@
 //
 
 #import "DAAppointmentListVC.h"
-
+#import "DAClinicListVC.h"
 
 
 @interface DAAppointmentTableViewcell : UITableViewCell
@@ -32,8 +32,8 @@
 @property (weak, nonatomic) IBOutlet UITableView *appointmentListTableView;
 
 @property (weak, nonatomic) IBOutlet UIButton *backBtnTapped;
-@property (weak, nonatomic) IBOutlet UIButton *AddBtnTapped;
 - (IBAction)BackBtnTapped:(id)sender;
+- (IBAction)addBtnTapped:(id)sender;
 
 @end
 
@@ -101,7 +101,7 @@
     [cell.lblDoctorName setText:[[[[appointmentArray  objectAtIndex:indexPath.row] objectForKey:@"patient_appoint_ment_slot"] objectForKey:@"patient_appointment_clinic"] objectForKey:@"clinicName"]];
 
     [cell.lblDiesesName setText:[[[[appointmentArray  objectAtIndex:indexPath.row] objectForKey:@"patient_appoint_ment_slot"] objectForKey:@"patient_appointment_clinic"] objectForKey:@"landMark"]];
-    
+    [cell.lblTimeSlot setText:[[[[appointmentArray  objectAtIndex:indexPath.row] objectForKey:@"patient_appoint_ment_slot"] objectForKey:@"patient_appointment_clinic"] objectForKey:@"landMark"]];
 
 //    [cell.lblDoctorName setText:[[[appointmentArray  valueForKey:@"data"] objectAtIndex:indexPath.row]valueForKey:@"name"]];
 //    [cell.lblDiesesName setText:[[[appointmentArray  valueForKey:@"data"]objectAtIndex:indexPath.row] valueForKey:@"number"]];
@@ -113,5 +113,11 @@
 - (IBAction)BackBtnTapped:(id)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)addBtnTapped:(id)sender
+{
+    DAClinicListVC *bokApVc = [self.storyboard instantiateViewControllerWithIdentifier:@"DAClinicListVC"];
+    [self.navigationController showViewController:bokApVc sender:self];
 }
 @end

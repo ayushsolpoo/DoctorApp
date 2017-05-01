@@ -46,6 +46,7 @@ PODS:
   - GoogleToolboxForMac/Defines (2.1.1)
   - GoogleToolboxForMac/NSData+zlib (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
+  - JTCalendar (2.1.9)
   - Reachability (3.2)
 
 DEPENDENCIES:
@@ -56,6 +57,7 @@ DEPENDENCIES:
   - FBSDKLoginKit
   - FBSDKShareKit
   - Google/Analytics
+  - JTCalendar (~> 2.0)
   - Reachability
 
 SPEC CHECKSUMS:
@@ -72,8 +74,9 @@ SPEC CHECKSUMS:
   Google: 813c467362eabc11385f5a5cc9ad0cb651a58f4e
   GoogleAnalytics: f42cc53a87a51fe94334821868d9c8481ff47a7b
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
+  JTCalendar: beb2f4c1b639bf6880f680b4858227acf83a049c
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
 
-PODFILE CHECKSUM: 34e4346585598bbe758462296faeecf384fa7b52
+PODFILE CHECKSUM: f37f8f5f0ac2a03346d8fd89245f72e2070e4c94
 
 COCOAPODS: 1.2.1

@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <JTCalendar/JTCalendar.h>
 @interface DABookAppointmentVC : UIViewController
 
 
-
-
+@property(strong,nonatomic) NSMutableArray *arrayClinicData;
+@property (strong, nonatomic) JTCalendarManager *calendarManager;
+@property (weak, nonatomic) IBOutlet JTCalendarMenuView *calendarMenuView;
+@property (weak, nonatomic) IBOutlet JTHorizontalCalendarView *calendarContentView;
 @end

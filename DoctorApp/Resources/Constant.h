@@ -12,15 +12,15 @@
 /* Web Services */
 //URLS
 
-#define BASE_URL                     @"http://182.73.229.226/api/v1/patient/"
+#define BASE_URL                     @"http://182.73.229.226/api/v1/"
 
-#define LOGIN                        @"login"
-#define REGISTRATION                 @"register"
+#define LOGIN                        @"patient/login"
+#define REGISTRATION                 @"patient/register"
 #define OTP_VERIFICATION             @"patient/otp/verification"
 #define SAVE_EMERGENCY_CONTACTS      @"patient/register/emergency-contact"
-#define GET_APPOINTMENT_LIST         @"appointment-list"
-
-
+#define GET_APPOINTMENT_LIST         @"patient/appointment-list"
+#define DOCTOR_CLINIC_LIST           @"doctor/clinic-list"
+#define TIME_SLOT                    @"doctor/time-slot"
 
 
 /* alert view constants */

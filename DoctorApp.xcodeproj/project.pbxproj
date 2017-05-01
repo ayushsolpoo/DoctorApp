@@ -21,6 +21,11 @@
 		5200B7771EB0D0BC006119F7 /* DAReminderCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5200B7761EB0D0BC006119F7 /* DAReminderCustomCell.xib */; };
 		5200B77F1EB1CA10006119F7 /* FacebookHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5200B77E1EB1CA10006119F7 /* FacebookHelper.m */; };
 		5200B7811EB1CF5A006119F7 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5200B7801EB1CF5A006119F7 /* FacebookSDK.framework */; };
+		523E7BA11EB326ED00A8BF45 /* DAClinicListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 523E7BA01EB326ED00A8BF45 /* DAClinicListVC.m */; };
+		523E7BA51EB3797B00A8BF45 /* DAReminderDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 523E7BA41EB3797B00A8BF45 /* DAReminderDetailVC.m */; };
+		523E7BA91EB4781D00A8BF45 /* DAClinicTimeSlotVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 523E7BA81EB4781D00A8BF45 /* DAClinicTimeSlotVC.m */; };
+		523E7BB51EB70CA000A8BF45 /* BasicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 523E7BB31EB70CA000A8BF45 /* BasicViewController.m */; };
+		523E7BB61EB70CA000A8BF45 /* BasicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 523E7BB41EB70CA000A8BF45 /* BasicViewController.xib */; };
 		8E36C1E21EADC5D60092E9D9 /* UITextField+Padding.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E36C1E11EADC5D60092E9D9 /* UITextField+Padding.m */; };
 		8E3871981EA8B804008DDB3B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3871971EA8B804008DDB3B /* main.m */; };
 		8E3871A11EA8B804008DDB3B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E38719F1EA8B804008DDB3B /* Main.storyboard */; };
@@ -108,6 +113,15 @@
 		5200B77D1EB1CA10006119F7 /* FacebookHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookHelper.h; sourceTree = "<group>"; };
 		5200B77E1EB1CA10006119F7 /* FacebookHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookHelper.m; sourceTree = "<group>"; };
 		5200B7801EB1CF5A006119F7 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = "DoctorApp/Third Party Classec/FacebookHelper/FacebookSDK.framework"; sourceTree = "<group>"; };
+		523E7B9F1EB326ED00A8BF45 /* DAClinicListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAClinicListVC.h; sourceTree = "<group>"; };
+		523E7BA01EB326ED00A8BF45 /* DAClinicListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAClinicListVC.m; sourceTree = "<group>"; };
+		523E7BA31EB3797B00A8BF45 /* DAReminderDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAReminderDetailVC.h; sourceTree = "<group>"; };
+		523E7BA41EB3797B00A8BF45 /* DAReminderDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAReminderDetailVC.m; sourceTree = "<group>"; };
+		523E7BA71EB4781D00A8BF45 /* DAClinicTimeSlotVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAClinicTimeSlotVC.h; sourceTree = "<group>"; };
+		523E7BA81EB4781D00A8BF45 /* DAClinicTimeSlotVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAClinicTimeSlotVC.m; sourceTree = "<group>"; };
+		523E7BB21EB70CA000A8BF45 /* BasicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicViewController.h; sourceTree = "<group>"; };
+		523E7BB31EB70CA000A8BF45 /* BasicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicViewController.m; sourceTree = "<group>"; };
+		523E7BB41EB70CA000A8BF45 /* BasicViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BasicViewController.xib; sourceTree = "<group>"; };
 		54EACD62011DEEB6B8332080 /* libPods-DoctorAppUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DoctorAppUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B5FE148CDE05A05B5049383 /* Pods-DoctorAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DoctorAppUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DoctorAppUITests/Pods-DoctorAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		8C28E6E24B8ADD42FDC14E7D /* libPods-DoctorApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DoctorApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -293,6 +307,44 @@
 			path = FacebookHelper;
 			sourceTree = "<group>";
 		};
+		523E7B9E1EB326B700A8BF45 /* DAClincsList */ = {
+			isa = PBXGroup;
+			children = (
+				523E7B9F1EB326ED00A8BF45 /* DAClinicListVC.h */,
+				523E7BA01EB326ED00A8BF45 /* DAClinicListVC.m */,
+				523E7BA61EB477BF00A8BF45 /* DAClinicTimeSlot */,
+			);
+			name = DAClincsList;
+			sourceTree = "<group>";
+		};
+		523E7BA21EB3796300A8BF45 /* DAReminderDetailVC */ = {
+			isa = PBXGroup;
+			children = (
+				523E7BA31EB3797B00A8BF45 /* DAReminderDetailVC.h */,
+				523E7BA41EB3797B00A8BF45 /* DAReminderDetailVC.m */,
+			);
+			path = DAReminderDetailVC;
+			sourceTree = "<group>";
+		};
+		523E7BA61EB477BF00A8BF45 /* DAClinicTimeSlot */ = {
+			isa = PBXGroup;
+			children = (
+				523E7BA71EB4781D00A8BF45 /* DAClinicTimeSlotVC.h */,
+				523E7BA81EB4781D00A8BF45 /* DAClinicTimeSlotVC.m */,
+			);
+			path = DAClinicTimeSlot;
+			sourceTree = "<group>";
+		};
+		523E7BAA1EB4AE4900A8BF45 /* Calender */ = {
+			isa = PBXGroup;
+			children = (
+				523E7BB21EB70CA000A8BF45 /* BasicViewController.h */,
+				523E7BB31EB70CA000A8BF45 /* BasicViewController.m */,
+				523E7BB41EB70CA000A8BF45 /* BasicViewController.xib */,
+			);
+			path = Calender;
+			sourceTree = "<group>";
+		};
 		797244095D8DBC53FDE06CE4 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -456,6 +508,7 @@
 		8E3871F61EA8BE41008DDB3B /* DAReminderVC */ = {
 			isa = PBXGroup;
 			children = (
+				523E7BA21EB3796300A8BF45 /* DAReminderDetailVC */,
 				8E38721A1EA8C1CA008DDB3B /* DAReminderVC.h */,
 				8E38721B1EA8C1CA008DDB3B /* DAReminderVC.m */,
 				5200B7761EB0D0BC006119F7 /* DAReminderCustomCell.xib */,
@@ -600,6 +653,7 @@
 		8E4B10721EAF5FB900CF1818 /* DAAppointmentListVC */ = {
 			isa = PBXGroup;
 			children = (
+				523E7B9E1EB326B700A8BF45 /* DAClincsList */,
 				8E4B10731EAF5FDE00CF1818 /* DAAppointmentListVC.h */,
 				8E4B10741EAF5FDE00CF1818 /* DAAppointmentListVC.m */,
 			);
@@ -635,6 +689,7 @@
 		8EF713A41EAE0B96005F8649 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				523E7BAA1EB4AE4900A8BF45 /* Calender */,
 				8EF713B41EAE1F30005F8649 /* Global Methods */,
 				8EF713A51EAE0B96005F8649 /* AES */,
 			);
@@ -797,6 +852,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8EF713881EADFF63005F8649 /* SVProgressHUD.bundle in Resources */,
+				523E7BB61EB70CA000A8BF45 /* BasicViewController.xib in Resources */,
 				8E4B10781EAF8A2200CF1818 /* GoogleService-Info.plist in Resources */,
 				8E3872451EA8D2ED008DDB3B /* Appointment.storyboard in Resources */,
 				8E3871A91EA8B804008DDB3B /* LaunchScreen.storyboard in Resources */,
@@ -990,6 +1046,7 @@
 				12EA25181EACA60C00D44609 /* DALeftSubVC1.m in Sources */,
 				8EF713B21EAE0B96005F8649 /* README.md in Sources */,
 				8EF713B01EAE0B96005F8649 /* NSData+CommonCrypto.m in Sources */,
+				523E7BB51EB70CA000A8BF45 /* BasicViewController.m in Sources */,
 				8E38720F1EA8BE62008DDB3B /* DASignUpVC.m in Sources */,
 				8E3871FA1EA8BE41008DDB3B /* DABookAppointmentVC.m in Sources */,
 				8E3872191EA8C1B8008DDB3B /* DAEventsVC.m in Sources */,
@@ -1015,9 +1072,12 @@
 				8EF713B31EAE0B96005F8649 /* TAAESCrypt.m in Sources */,
 				1290673F1EAB8CEA00C9A04B /* DARighMenuVC.m in Sources */,
 				8E3872481EA8D675008DDB3B /* DAHomeVC.m in Sources */,
+				523E7BA11EB326ED00A8BF45 /* DAClinicListVC.m in Sources */,
 				8E3871981EA8B804008DDB3B /* main.m in Sources */,
+				523E7BA91EB4781D00A8BF45 /* DAClinicTimeSlotVC.m in Sources */,
 				8E4B10751EAF5FDE00CF1818 /* DAAppointmentListVC.m in Sources */,
 				8E36C1E21EADC5D60092E9D9 /* UITextField+Padding.m in Sources */,
+				523E7BA51EB3797B00A8BF45 /* DAReminderDetailVC.m in Sources */,
 				8E38720C1EA8BE62008DDB3B /* DAForgotPwdVC.m in Sources */,
 				8E3871F91EA8BE41008DDB3B /* DABlogsVC.m in Sources */,
 				8EF713B11EAE0B96005F8649 /* NSString+Base64.m in Sources */,

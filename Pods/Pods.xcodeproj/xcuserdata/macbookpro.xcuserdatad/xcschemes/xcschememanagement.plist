@@ -34,6 +34,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>JTCalendar.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-DoctorApp.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -57,7 +62,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>07D5CB583A3A330BD24F3A36B9083967</key>
+		<key>0BE4A16FFDEF8D8F814E3AE6A2577F6C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -67,17 +72,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>479FDF17C6D1B0FC7A4E06DD8E0D46E3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>5DC7D7B380A5FEAE815A0DDD986A0174</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>86C440F3FBC3671C227FD17F1A1D9D7D</key>
+		<key>9E033EDB5EC0819481B0546434FA577B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9E033EDB5EC0819481B0546434FA577B</key>
+		<key>A1FFD69CE6A3848BAF6084E785121FD0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
