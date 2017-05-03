@@ -11,7 +11,7 @@
 
 /* Web Services */
 //URLS
-
+ 
 #define BASE_URL                     @"http://182.73.229.226/api/v1/"
 
 #define LOGIN                        @"patient/login"
@@ -21,7 +21,7 @@
 #define GET_APPOINTMENT_LIST         @"patient/appointment-list"
 #define DOCTOR_CLINIC_LIST           @"doctor/clinic-list"
 #define TIME_SLOT                    @"doctor/time-slot"
-
+#define BOOK_APPOINTMENT             @"patient/book-appointment"
 
 /* alert view constants */
 

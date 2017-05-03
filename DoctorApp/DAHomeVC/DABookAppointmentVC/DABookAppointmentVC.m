@@ -23,10 +23,16 @@
     NSDate *_maxDate;
     NSInteger dayId;
     NSDate *_dateSelected;
+    NSString *appointmentDateforPatient;
+    NSDictionary *dictSelected;
+    NSString *selectedDate;
 }
+@property(strong,nonatomic) NSMutableArray *arrayDataToShow;
 @property(strong,nonatomic)NSMutableArray *arrayOfData;
 @property(strong,nonatomic)NSDictionary *dictOfData;
+@property (weak, nonatomic) IBOutlet UIWebView *webViewpayment;
 @property (weak, nonatomic) IBOutlet UIView *viewCalender;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionViewTimeSlot;
 @property (weak, nonatomic) IBOutlet UIButton *btnTodaysDate;
 - (IBAction)backBtnTapped:(id)sender;
 - (IBAction)calenderBtnTapped:(id)sender;
@@ -47,17 +53,15 @@
     sectionArray = [[NSArray alloc]initWithObjects:@"Morning",@"Afernoon",@"Evening", nil];
     cellArray    = [[NSMutableArray alloc]initWithObjects:@"9:00",@"9:30",@"10:00",@"10:30",@"11:00",@"11:30", nil];
      _todayDate = [NSDate date];
+    _dateSelected = [NSDate date];
+    dictSelected = [[NSDictionary alloc] init];
+    appointmentDateforPatient = [[NSString alloc] init];
     [self getClinicList];
     NSDateFormatter *dateFormat;
-   
+    _webViewpayment.hidden = YES;
     [dateFormat setTimeZone:[NSTimeZone systemTimeZone]];
-    // again add the date format what the output u need
-   // [dateFormat setDateFormat:@"dd-MM-yyyy"];
+    
     NSString *finalDate = [NSString stringWithFormat:@"%@",_todayDate];
-    
-   // NSString *finalDate = [dateFormat stringFromDate:_todayDate];
-    //[_btnTodaysDate setTintColor:[UIColor blackColor]];
-    
     [_btnTodaysDate setTitle:finalDate forState:UIControlStateNormal];
     //calender functions
     _calendarManager = [JTCalendarManager new];
@@ -83,7 +87,7 @@
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return cellArray.count;
+    return _arrayDataToShow.count;
 }
 
 // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
@@ -91,9 +95,90 @@
 {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     UILabel *lblTimeSlot = (UILabel*)[cell.contentView viewWithTag:100];
-    [lblTimeSlot setText:cellArray[indexPath.row]];
+    
+    NSInteger iDofSlot = [[_arrayDataToShow objectAtIndex:indexPath.row] objectForKey:@"id"];
+    NSArray *arrayofBookedAppointment = [_dictOfData objectForKey:@"BookedAppointment"];
+    NSLog(@"%@",_dateSelected);
+ //   dateFormatter.dateFormat = @"dd-MM-yyyy";
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init] ;
+    [dateFormatter setDateFormat:@"dd-MM-yyyy"];
+    NSString *selectedDate = [dateFormatter stringFromDate:_dateSelected];
+    
+    
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init] ;
+   
+    
+
+    lblTimeSlot.textColor = [UIColor grayColor];
+    for (int i = 0; i < arrayofBookedAppointment.count; i++)
+    {
+        NSInteger bookedID =[[arrayofBookedAppointment objectAtIndex:i] objectForKey:@"slot_Id"];
+        
+        [dateFormat setDateFormat:@"yyyy-MM-dd hh:mm:s"];
+        NSDate *dateForAppointment = [dateFormat dateFromString:[[arrayofBookedAppointment objectAtIndex:i] objectForKey:@"appt_date"]];
+        [dateFormat setDateFormat:@"dd-MM-yyyy"];
+        NSString *appointmentDate = [dateFormat stringFromDate:dateForAppointment];
+
+        if (bookedID == iDofSlot)
+        {
+            if ([appointmentDate isEqualToString:selectedDate])
+            {
+                lblTimeSlot.textColor = [UIColor greenColor];
+            }
+        }
+        
+    }
+
+   
+    [lblTimeSlot setText:[[_arrayDataToShow objectAtIndex:indexPath.row] objectForKey:@"slot_name"]];
     
     return  cell;
+}
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+    UILabel *lblTimeSlot = (UILabel*)[cell.contentView viewWithTag:100];
+    selectedDate = [[NSString alloc] init];
+    NSInteger iDofSlot = [[_arrayDataToShow objectAtIndex:indexPath.row] objectForKey:@"id"];
+    NSArray *arrayofBookedAppointment = [_dictOfData objectForKey:@"BookedAppointment"];
+    NSLog(@"%@",_dateSelected);
+    //   dateFormatter.dateFormat = @"dd-MM-yyyy";
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init] ;
+    [dateFormatter setDateFormat:@"dd-MM-yyyy"];
+    selectedDate = [dateFormatter stringFromDate:_dateSelected];
+     dictSelected = [[NSDictionary alloc] init];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init] ;
+    lblTimeSlot.textColor = [UIColor grayColor];
+    for (int i = 0; i < arrayofBookedAppointment.count; i++)
+    {
+        NSInteger bookedID =[[arrayofBookedAppointment objectAtIndex:i] objectForKey:@"slot_Id"];
+        
+        [dateFormat setDateFormat:@"yyyy-MM-dd hh:mm:s"];
+        NSDate *dateForAppointment = [dateFormat dateFromString:[[arrayofBookedAppointment objectAtIndex:i] objectForKey:@"appt_date"]];
+        [dateFormat setDateFormat:@"dd-MM-yyyy"];
+        appointmentDateforPatient = [dateFormat stringFromDate:dateForAppointment];
+        
+        if (bookedID == iDofSlot)
+        {
+            if ([appointmentDateforPatient isEqualToString:selectedDate])
+            {
+                //green color
+                [[[UIAlertView alloc] initWithTitle:kAppName message:@"Slot not available." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+            }
+            
+            
+        }
+        else
+        {
+            dictSelected = [_arrayDataToShow objectAtIndex:i];
+            _webViewpayment.hidden = NO;
+            [self makePayment];
+        }
+        
+    }
+
 }
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
            viewForSupplementaryElementOfKind:(NSString *)kind
@@ -109,17 +194,111 @@
 
 - (void)updateSectionHeader:(DABookAppointmentCollectionReusableView *)header forIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *text = [NSString stringWithFormat:@"header #%ld", (long)indexPath.section];
-    header.headerLabel.text = text;
+//    NSString *text = [NSString stringWithFormat:@"header #%ld", (long)indexPath.section];
+//    header.headerLabel.text = text;
 }
 
 //TODO: GET CLINIC LIST TIME SLOT
 -(void)sortDataAccordingToDayId:(NSInteger)dayId
 {
-//    for (int i = 0; i < [[_arrayOfData objectAtIndex:0] objectForKey:@"DoctorTimeSlot"] ; i++)
+    _arrayDataToShow = [[NSMutableArray alloc] init];
+    NSString *strID = [NSString stringWithFormat:@"%ld",(long)dayId];
+    NSArray *arrayOfData = [_dictOfData objectForKey:@"DoctorTimeSlot"];
+    NSInteger count = arrayOfData.count;
+    for (int i = 0; i < count ; i++)
+    {
+        NSString *strDayidSlot = [NSString stringWithFormat:@"%@",[[arrayOfData objectAtIndex:i] objectForKey:@"dayId"]];
+        if ([strID isEqualToString:strDayidSlot])
+        {
+            [_arrayDataToShow addObject:[arrayOfData objectAtIndex:i]];
+        }
+    }
+    [_collectionViewTimeSlot reloadData];
+    NSLog(@"%@",_arrayDataToShow);
+    
+}
+//TODO:webview delegates
+- (void)webViewDidFinishLoad:(UIWebView *)webView{
+    
+    
+}
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
+    
+    
+}
+- (BOOL)webView:(UIWebView*)webView shouldStartLoadWithRequest:(NSURLRequest*)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    NSLog(@"%@",request);
+    NSString *strUrl = [NSString stringWithFormat:@"%@",request.URL];
+    if ([strUrl isEqualToString:@"http://182.73.229.226/payment?status=success"])
+    {
+        self.webViewpayment.hidden = YES;
+        [self bookAppointment];
+        return NO;
+    }
+    
+    
+//    else if ([strUrl isEqualToString:@"http://182.73.229.226/payment?status=fail"])
 //    {
-//        
+//        self.webViewpayment.hidden = YES;
+//        return NO;
 //    }
+//    else
+//    {
+//         return YES;
+//    }
+    return YES;
+}
+
+//TODO:web service integration
+-(void)bookAppointment
+{
+//patient/book-appointment
+    //api_token,doctor_Id,patient_Id,clinic_Id,slot_Id,token_Id,appt_date
+    [SVProgressHUD show];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init] ;
+    [dateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:s"];
+    selectedDate = [dateFormatter stringFromDate:_dateSelected];
+    _dateSelected = [dateFormatter dateFromString:selectedDate];
+    NSInteger slotID = [[dictSelected objectForKey:@"id"] integerValue];
+  
+    
+    NSString *urlString = [NSString stringWithFormat:@"%@%@?api_token=%@&clinic_Id=%d&doctor_Id=%d&patient_Id=%d&slot_Id=%ld&token_Id=%ldappt_date=%@",BASE_URL,BOOK_APPOINTMENT,@"PUmvc65KlvuVskKZYUzBFxYxkHe4G7TbRHOWGW5E8NtopgqZIACkeDIGaRqK",1,1,1,(long)slotID,(long)slotID,_dateSelected];
+   
+    [[NetworkManager sharedManager] requestApiWithName:urlString requestType:kHTTPMethodPOST postData:nil callBackBlock:^(id response, NSError *error) {
+        
+        [SVProgressHUD dismiss];
+        if (response)
+        {
+            NSError *error;
+            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:response options:0 error:&error];
+            
+            if (!jsonData)
+            {
+                
+            }
+            else
+            {
+                NSString *JSONString = [[NSString alloc] initWithBytes:[jsonData bytes] length:[jsonData length] encoding:NSUTF8StringEncoding];
+                NSLog(@"%@",JSONString);
+                [self getClinicList];
+            }
+            
+            NSDictionary *responseDict = [[NSMutableDictionary alloc]initWithDictionary:response];
+            
+        }
+        else if (error)
+        {
+            NSLog(@"the error is %@",[error localizedDescription]);
+        }
+    }];
+
+}
+-(void)makePayment
+{
+    //self.view.hidden = YES;
+    NSString *urlString = [NSString stringWithFormat:@"http://182.73.229.226/make-payment"];
+    [_webViewpayment loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]]];
 }
 -(void)getClinicList
 {
@@ -155,16 +334,6 @@
                     [self returnDayId:selectedDate];
 
                 }
-               
-                
-//                BasicViewController *ngView = [[BasicViewController alloc]initWithNibName:@"BasicViewController" bundle:Nil];
-//                [self presentViewController:ngView animated:NO completion:nil];
-                
-//                BasicViewController *bokApVc = [self.storyboard instantiateViewControllerWithIdentifier:@"BasicViewController"];
-//                [self.navigationController showViewController:bokApVc sender:self];
-//                clinicArray = [DAGlobal checkNullArray:[responseDict objectForKey:@"data"]];
-//                [_clinicListTableView reloadData];
-            
         }
         else if (error)
         {
@@ -192,7 +361,8 @@
     [_calendarManager reload];
     
     CGFloat newHeight = 300;
-    if(_calendarManager.settings.weekModeEnabled){
+    if(_calendarManager.settings.weekModeEnabled)
+    {
         newHeight = 85.;
     }
     

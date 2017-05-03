@@ -564,8 +564,57 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p1f-6t-iqZ">
+                                <rect key="frame" x="1" y="64" width="374" height="603"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <outlet property="delegate" destination="ebl-QR-jWx" id="7TL-Ue-SRX"/>
+                                </connections>
+                            </webView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wo2-Z0-dX8">
+                                <rect key="frame" x="59" y="78" width="257" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <state key="normal">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="calenderBtnTapped:" destination="ebl-QR-jWx" eventType="touchUpInside" id="dwi-6D-u54"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5ev-Rq-8eR">
+                                <rect key="frame" x="1" y="289" width="374" height="374"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xZh-TQ-WIR" customClass="JTCalendarMenuView">
+                                        <rect key="frame" x="0.0" y="26" width="600" height="50"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="Xah-vN-iGd"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SBL-k9-qI2" customClass="JTHorizontalCalendarView">
+                                        <rect key="frame" x="0.0" y="82" width="600" height="300"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="300" id="UHu-jJ-hDb"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="SBL-k9-qI2" firstAttribute="top" secondItem="xZh-TQ-WIR" secondAttribute="bottom" constant="6" id="9mE-hC-bLz"/>
+                                    <constraint firstAttribute="height" constant="374" id="HIJ-U1-QtZ"/>
+                                    <constraint firstAttribute="bottom" secondItem="SBL-k9-qI2" secondAttribute="bottom" constant="-8" id="QIb-ZI-fsj"/>
+                                    <constraint firstItem="xZh-TQ-WIR" firstAttribute="leading" secondItem="5ev-Rq-8eR" secondAttribute="leading" id="Tcm-bx-bn8"/>
+                                    <constraint firstAttribute="trailing" secondItem="xZh-TQ-WIR" secondAttribute="trailing" constant="-226" id="U51-q3-Xli"/>
+                                    <constraint firstItem="xZh-TQ-WIR" firstAttribute="top" secondItem="5ev-Rq-8eR" secondAttribute="top" constant="26" id="hbp-rb-QSo"/>
+                                    <constraint firstItem="SBL-k9-qI2" firstAttribute="leading" secondItem="5ev-Rq-8eR" secondAttribute="leading" id="tqW-rB-x7A"/>
+                                    <constraint firstAttribute="trailing" secondItem="SBL-k9-qI2" secondAttribute="trailing" constant="-226" id="wHF-cV-vkg"/>
+                                </constraints>
+                            </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="IzR-RP-Avr">
-                                <rect key="frame" x="15" y="113" width="344" height="175"/>
+                                <rect key="frame" x="16" y="119" width="344" height="175"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="uBX-QC-NA4">
@@ -625,47 +674,6 @@
                                     <outlet property="delegate" destination="ebl-QR-jWx" id="gTI-eh-db0"/>
                                 </connections>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wo2-Z0-dX8">
-                                <rect key="frame" x="59" y="78" width="257" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <state key="normal">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="calenderBtnTapped:" destination="ebl-QR-jWx" eventType="touchUpInside" id="dwi-6D-u54"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5ev-Rq-8eR">
-                                <rect key="frame" x="1" y="289" width="374" height="374"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xZh-TQ-WIR" customClass="JTCalendarMenuView">
-                                        <rect key="frame" x="0.0" y="26" width="600" height="50"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="Xah-vN-iGd"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SBL-k9-qI2" customClass="JTHorizontalCalendarView">
-                                        <rect key="frame" x="0.0" y="82" width="600" height="300"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="300" id="UHu-jJ-hDb"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="SBL-k9-qI2" firstAttribute="top" secondItem="xZh-TQ-WIR" secondAttribute="bottom" constant="6" id="9mE-hC-bLz"/>
-                                    <constraint firstAttribute="height" constant="374" id="HIJ-U1-QtZ"/>
-                                    <constraint firstAttribute="bottom" secondItem="SBL-k9-qI2" secondAttribute="bottom" constant="-8" id="QIb-ZI-fsj"/>
-                                    <constraint firstItem="xZh-TQ-WIR" firstAttribute="leading" secondItem="5ev-Rq-8eR" secondAttribute="leading" id="Tcm-bx-bn8"/>
-                                    <constraint firstAttribute="trailing" secondItem="xZh-TQ-WIR" secondAttribute="trailing" constant="-226" id="U51-q3-Xli"/>
-                                    <constraint firstItem="xZh-TQ-WIR" firstAttribute="top" secondItem="5ev-Rq-8eR" secondAttribute="top" constant="26" id="hbp-rb-QSo"/>
-                                    <constraint firstItem="SBL-k9-qI2" firstAttribute="leading" secondItem="5ev-Rq-8eR" secondAttribute="leading" id="tqW-rB-x7A"/>
-                                    <constraint firstAttribute="trailing" secondItem="SBL-k9-qI2" secondAttribute="trailing" constant="-226" id="wHF-cV-vkg"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -679,12 +687,14 @@
                         <outlet property="btnTodaysDate" destination="wo2-Z0-dX8" id="FVH-rT-F47"/>
                         <outlet property="calendarContentView" destination="SBL-k9-qI2" id="Dxz-4Y-HZj"/>
                         <outlet property="calendarMenuView" destination="xZh-TQ-WIR" id="1Xn-9A-N59"/>
+                        <outlet property="collectionViewTimeSlot" destination="IzR-RP-Avr" id="dhU-0F-JJS"/>
                         <outlet property="viewCalender" destination="5ev-Rq-8eR" id="R5H-ma-RWt"/>
+                        <outlet property="webViewpayment" destination="p1f-6t-iqZ" id="WFJ-As-vwM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m2f-h9-2Ic" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3240.8000000000002" y="52.623688155922046"/>
+            <point key="canvasLocation" x="3240.5" y="52.5"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="8qn-jf-0Qf">
