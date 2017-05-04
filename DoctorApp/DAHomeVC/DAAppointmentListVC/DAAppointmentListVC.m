@@ -51,7 +51,8 @@
 
 //TODO: GET APPOINTMENT LIST
 
--(void)getAppointmentList{
+-(void)getAppointmentList
+{
   
     [SVProgressHUD show];
     NSString *urlString = [NSString stringWithFormat:@"%@%@?api_token=%@",BASE_URL,GET_APPOINTMENT_LIST,@"PUmvc65KlvuVskKZYUzBFxYxkHe4G7TbRHOWGW5E8NtopgqZIACkeDIGaRqK"];
@@ -102,10 +103,6 @@
 
     [cell.lblDiesesName setText:[[[[appointmentArray  objectAtIndex:indexPath.row] objectForKey:@"patient_appoint_ment_slot"] objectForKey:@"patient_appointment_clinic"] objectForKey:@"landMark"]];
     [cell.lblTimeSlot setText:[[[[appointmentArray  objectAtIndex:indexPath.row] objectForKey:@"patient_appoint_ment_slot"] objectForKey:@"patient_appointment_clinic"] objectForKey:@"landMark"]];
-
-//    [cell.lblDoctorName setText:[[[appointmentArray  valueForKey:@"data"] objectAtIndex:indexPath.row]valueForKey:@"name"]];
-//    [cell.lblDiesesName setText:[[[appointmentArray  valueForKey:@"data"]objectAtIndex:indexPath.row] valueForKey:@"number"]];
-//    [cell.lblTimeSlot setText:[[[[[appointmentArray  valueForKey:@"data"]objectAtIndex:indexPath.row] valueForKey:@"appoint_ment_list"] objectAtIndex:0] valueForKey:@"appt_date"]];
     return cell;
     
 }

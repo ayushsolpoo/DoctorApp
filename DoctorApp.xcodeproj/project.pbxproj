@@ -23,7 +23,6 @@
 		5200B7811EB1CF5A006119F7 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5200B7801EB1CF5A006119F7 /* FacebookSDK.framework */; };
 		523E7BA11EB326ED00A8BF45 /* DAClinicListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 523E7BA01EB326ED00A8BF45 /* DAClinicListVC.m */; };
 		523E7BA51EB3797B00A8BF45 /* DAReminderDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 523E7BA41EB3797B00A8BF45 /* DAReminderDetailVC.m */; };
-		523E7BA91EB4781D00A8BF45 /* DAClinicTimeSlotVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 523E7BA81EB4781D00A8BF45 /* DAClinicTimeSlotVC.m */; };
 		523E7BB51EB70CA000A8BF45 /* BasicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 523E7BB31EB70CA000A8BF45 /* BasicViewController.m */; };
 		523E7BB61EB70CA000A8BF45 /* BasicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 523E7BB41EB70CA000A8BF45 /* BasicViewController.xib */; };
 		8E36C1E21EADC5D60092E9D9 /* UITextField+Padding.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E36C1E11EADC5D60092E9D9 /* UITextField+Padding.m */; };
@@ -117,8 +116,6 @@
 		523E7BA01EB326ED00A8BF45 /* DAClinicListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAClinicListVC.m; sourceTree = "<group>"; };
 		523E7BA31EB3797B00A8BF45 /* DAReminderDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAReminderDetailVC.h; sourceTree = "<group>"; };
 		523E7BA41EB3797B00A8BF45 /* DAReminderDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAReminderDetailVC.m; sourceTree = "<group>"; };
-		523E7BA71EB4781D00A8BF45 /* DAClinicTimeSlotVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAClinicTimeSlotVC.h; sourceTree = "<group>"; };
-		523E7BA81EB4781D00A8BF45 /* DAClinicTimeSlotVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAClinicTimeSlotVC.m; sourceTree = "<group>"; };
 		523E7BB21EB70CA000A8BF45 /* BasicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicViewController.h; sourceTree = "<group>"; };
 		523E7BB31EB70CA000A8BF45 /* BasicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicViewController.m; sourceTree = "<group>"; };
 		523E7BB41EB70CA000A8BF45 /* BasicViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BasicViewController.xib; sourceTree = "<group>"; };
@@ -312,7 +309,6 @@
 			children = (
 				523E7B9F1EB326ED00A8BF45 /* DAClinicListVC.h */,
 				523E7BA01EB326ED00A8BF45 /* DAClinicListVC.m */,
-				523E7BA61EB477BF00A8BF45 /* DAClinicTimeSlot */,
 			);
 			name = DAClincsList;
 			sourceTree = "<group>";
@@ -324,15 +320,6 @@
 				523E7BA41EB3797B00A8BF45 /* DAReminderDetailVC.m */,
 			);
 			path = DAReminderDetailVC;
-			sourceTree = "<group>";
-		};
-		523E7BA61EB477BF00A8BF45 /* DAClinicTimeSlot */ = {
-			isa = PBXGroup;
-			children = (
-				523E7BA71EB4781D00A8BF45 /* DAClinicTimeSlotVC.h */,
-				523E7BA81EB4781D00A8BF45 /* DAClinicTimeSlotVC.m */,
-			);
-			path = DAClinicTimeSlot;
 			sourceTree = "<group>";
 		};
 		523E7BAA1EB4AE4900A8BF45 /* Calender */ = {
@@ -1074,7 +1061,6 @@
 				8E3872481EA8D675008DDB3B /* DAHomeVC.m in Sources */,
 				523E7BA11EB326ED00A8BF45 /* DAClinicListVC.m in Sources */,
 				8E3871981EA8B804008DDB3B /* main.m in Sources */,
-				523E7BA91EB4781D00A8BF45 /* DAClinicTimeSlotVC.m in Sources */,
 				8E4B10751EAF5FDE00CF1818 /* DAAppointmentListVC.m in Sources */,
 				8E36C1E21EADC5D60092E9D9 /* UITextField+Padding.m in Sources */,
 				523E7BA51EB3797B00A8BF45 /* DAReminderDetailVC.m in Sources */,

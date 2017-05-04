@@ -141,8 +141,8 @@
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     UILabel *lblTimeSlot = (UILabel*)[cell.contentView viewWithTag:100];
     selectedDate = [[NSString alloc] init];
-    NSInteger iDofSlot = [[_arrayDataToShow objectAtIndex:indexPath.row] objectForKey:@"id"];
-    NSArray *arrayofBookedAppointment = [_dictOfData objectForKey:@"BookedAppointment"];
+    NSInteger iDofSlot = [[[_arrayDataToShow objectAtIndex:indexPath.row] objectForKey:@"id"] integerValue];
+    NSMutableArray *arrayofBookedAppointment = [_dictOfData objectForKey:@"BookedAppointment"];
     NSLog(@"%@",_dateSelected);
     //   dateFormatter.dateFormat = @"dd-MM-yyyy";
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init] ;
@@ -151,33 +151,35 @@
      dictSelected = [[NSDictionary alloc] init];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init] ;
     lblTimeSlot.textColor = [UIColor grayColor];
-    for (int i = 0; i < arrayofBookedAppointment.count; i++)
+    if (arrayofBookedAppointment.count > 0)
     {
-        NSInteger bookedID =[[arrayofBookedAppointment objectAtIndex:i] objectForKey:@"slot_Id"];
-        
-        [dateFormat setDateFormat:@"yyyy-MM-dd hh:mm:s"];
-        NSDate *dateForAppointment = [dateFormat dateFromString:[[arrayofBookedAppointment objectAtIndex:i] objectForKey:@"appt_date"]];
-        [dateFormat setDateFormat:@"dd-MM-yyyy"];
-        appointmentDateforPatient = [dateFormat stringFromDate:dateForAppointment];
-        
-        if (bookedID == iDofSlot)
+        for (int i = 0; i < arrayofBookedAppointment.count; i++)
         {
-            if ([appointmentDateforPatient isEqualToString:selectedDate])
+            NSInteger bookedID =[[[arrayofBookedAppointment objectAtIndex:i] objectForKey:@"slot_Id"] integerValue];
+            
+            [dateFormat setDateFormat:@"yyyy-MM-dd hh:mm:s"];
+            NSDate *dateForAppointment = [dateFormat dateFromString:[[arrayofBookedAppointment objectAtIndex:i] objectForKey:@"appt_date"]];
+            [dateFormat setDateFormat:@"dd-MM-yyyy"];
+            appointmentDateforPatient = [dateFormat stringFromDate:dateForAppointment];
+            
+            if (bookedID == iDofSlot)
             {
-                //green color
-                [[[UIAlertView alloc] initWithTitle:kAppName message:@"Slot not available." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+                if ([appointmentDateforPatient isEqualToString:selectedDate])
+                {
+                    //green color
+                    [[[UIAlertView alloc] initWithTitle:kAppName message:@"Slot not available." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+                    return;
+                }
+                
+                
             }
             
-            
         }
-        else
-        {
-            dictSelected = [_arrayDataToShow objectAtIndex:i];
-            _webViewpayment.hidden = NO;
-            [self makePayment];
-        }
-        
     }
+        dictSelected = [_arrayDataToShow objectAtIndex:indexPath.row];
+    _webViewpayment.hidden = NO;
+    [self makePayment];
+  
 
 }
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
@@ -260,12 +262,25 @@
     [dateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:s"];
     selectedDate = [dateFormatter stringFromDate:_dateSelected];
     _dateSelected = [dateFormatter dateFromString:selectedDate];
-    NSInteger slotID = [[dictSelected objectForKey:@"id"] integerValue];
-  
+    if ([selectedDate containsString:@"+0000"])
+    {
+        NSLog(@"%@",selectedDate);
+    }
     
-    NSString *urlString = [NSString stringWithFormat:@"%@%@?api_token=%@&clinic_Id=%d&doctor_Id=%d&patient_Id=%d&slot_Id=%ld&token_Id=%ldappt_date=%@",BASE_URL,BOOK_APPOINTMENT,@"PUmvc65KlvuVskKZYUzBFxYxkHe4G7TbRHOWGW5E8NtopgqZIACkeDIGaRqK",1,1,1,(long)slotID,(long)slotID,_dateSelected];
+    int slotID = [[dictSelected objectForKey:@"id"] intValue];
+    NSDictionary * paramDict = @{
+                              @"api_token":@"PUmvc65KlvuVskKZYUzBFxYxkHe4G7TbRHOWGW5E8NtopgqZIACkeDIGaRqK",
+                              @"clinic_Id":@1,
+                              @"doctor_Id":@1,
+                              @"patient_Id":@1,
+                              @"slot_Id":[NSNumber numberWithInt:slotID],
+                              @"token_Id":[NSNumber numberWithInt:slotID],
+                              @"appt_date":selectedDate
+                              };
+    
+    NSString *urlString = [NSString stringWithFormat:@"%@%@",BASE_URL,BOOK_APPOINTMENT];
    
-    [[NetworkManager sharedManager] requestApiWithName:urlString requestType:kHTTPMethodPOST postData:nil callBackBlock:^(id response, NSError *error) {
+    [[NetworkManager sharedManager] requestApiWithName:urlString requestType:kHTTPMethodPOST postData:paramDict callBackBlock:^(id response, NSError *error) {
         
         [SVProgressHUD dismiss];
         if (response)

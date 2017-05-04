@@ -22,6 +22,7 @@
 #define DOCTOR_CLINIC_LIST           @"doctor/clinic-list"
 #define TIME_SLOT                    @"doctor/time-slot"
 #define BOOK_APPOINTMENT             @"patient/book-appointment"
+#define REMINDER_LIST                @"patient/get-reminder-list"
 
 /* alert view constants */
 
