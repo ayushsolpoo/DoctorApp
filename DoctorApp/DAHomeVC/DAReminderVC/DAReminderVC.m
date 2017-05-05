@@ -7,6 +7,7 @@
 //
 
 #import "DAReminderVC.h"
+#import "DAReminderDetailVC.h"
 @interface DAReminderTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *lblReminderName;
@@ -22,6 +23,7 @@
     NSDictionary *dictOfData;
     NSMutableArray *arrayDataToLoad;
 }
+- (IBAction)backBtnTapped:(id)sender;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentmediLab;
 @property (weak, nonatomic) IBOutlet UITableView *tableViewReminderList;
 
@@ -34,7 +36,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     arrayDataToLoad = [[NSMutableArray alloc] init];
-    [self callMedicineRemindersWebService];
+    self.navigationController.navigationBar.hidden = YES;
+    
     // Do any additional setup after loading the view.
 }
 
@@ -42,7 +45,10 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self callMedicineRemindersWebService];
+}
 
 #pragma mark - Navigation
 
@@ -71,12 +77,12 @@
     DAReminderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DAReminderTableViewCell"];
     if (self.segmentmediLab.selectedSegmentIndex == 0)
     {
-        cell.lblReminderName = [[arrayDataToLoad objectAtIndex:indexPath.row] objectForKey:@"medicineName"];
+        cell.lblReminderName.text = [[arrayDataToLoad objectAtIndex:indexPath.row] objectForKey:@"medicineName"];
         
     }
     else
     {
-         cell.lblReminderName = [[arrayDataToLoad objectAtIndex:indexPath.row] objectForKey:@"testName"];
+         cell.lblReminderName.text = [[arrayDataToLoad objectAtIndex:indexPath.row] objectForKey:@"testName"];
         
     }
     
@@ -84,6 +90,11 @@
     
      return cell;
     
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    DAReminderDetailVC *bokApVc = [self.storyboard instantiateViewControllerWithIdentifier:@"DAReminderDetailVC"];
+    [self.navigationController showViewController:bokApVc sender:self];
 }
 
 //TODO:Web Service functions
@@ -124,7 +135,7 @@
                  if ([dictionary objectForKey:@"data"])
                  {
                      dictOfData = [dictionary objectForKey:@"data"];
-                    
+                    [self callParticularSegment:0];
                  
                  [SVProgressHUD dismiss];
                  }
@@ -162,5 +173,9 @@
 {
     NSInteger selectedIndex = self.segmentmediLab.selectedSegmentIndex;
     [self callParticularSegment:selectedIndex];
+}
+- (IBAction)backBtnTapped:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 @end
