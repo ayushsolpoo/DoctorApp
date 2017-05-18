@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ALChatManager.h"
 
 @interface DAChatVC : UIViewController
-
+@property(nonatomic,strong) UIActivityIndicatorView *activityView;
 @end

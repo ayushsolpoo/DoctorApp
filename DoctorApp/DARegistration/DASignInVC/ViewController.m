@@ -16,16 +16,22 @@
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @property (weak, nonatomic) IBOutlet UITextField *pasTextField;
-
-
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setleftimages];
+   
     
 }
+
+-(void)viewWillAppear:(BOOL)animated
+{
+     self.navigationController.navigationBar.hidden = YES;
+}
+
 #pragma mark : Log in with facebook
 -(void)fbButtonClicked{
    //  [SVProgressHUD show];
@@ -43,8 +49,31 @@
             // [self loginApi];
          }
      }];
+}
+
+//#pragmaMark:- leftimages:-
+
+-(void)setleftimages
+{
+    _emailTextField.leftViewMode = UITextFieldViewModeAlways;
+    _emailTextField.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"email_icon.png"]];
     
+    _pasTextField.leftViewMode = UITextFieldViewModeAlways;
+    _pasTextField.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"password_icon.png"]];
+     _emailTextField.layer.sublayerTransform = CATransform3DMakeTranslation(0, 0, 0);
+     _pasTextField.layer.sublayerTransform = CATransform3DMakeTranslation(0, 0, 0);
     
+    submitbutton.layer.cornerRadius = 15.0;
+    submitbutton.layer.shadowColor = [UIColor blackColor].CGColor;
+    submitbutton.layer.shadowOffset = CGSizeMake(3, 3);
+    submitbutton.layer.shadowRadius = 5;
+    submitbutton.layer.shadowOpacity = 0.3;
+    
+    facebookbtn.layer.cornerRadius = 15.0;
+    facebookbtn.layer.shadowColor = [UIColor blackColor].CGColor;
+    facebookbtn.layer.shadowOffset = CGSizeMake(3, 3);
+    facebookbtn.layer.shadowRadius = 5;
+    facebookbtn.layer.shadowOpacity = 0.3;
 }
 #pragma mark textfield delegate methods
 
@@ -55,9 +84,7 @@
 }
 
 - (IBAction)submitBtnPressed:(id)sender
-
 {
-    
     UIButton *button = (UIButton *)sender;
     button.enabled = NO;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -70,9 +97,6 @@
     {
     }
     else if (![emailTest evaluateWithObject:_emailTextField.text]) {
-        
-        
-        
     }
     
     else
@@ -200,9 +224,6 @@
     DASignUpVC *signUp = [self.storyboard instantiateViewControllerWithIdentifier:@"DASignUpVC"];
     [self.navigationController showViewController:signUp sender:self];
     
-//    DAEmergencyContactsVC *signUp = [self.storyboard instantiateViewControllerWithIdentifier:@"DAEmergencyContactsVC"];
-//    [self.navigationController showViewController:signUp sender:self];
-
 }
 
 - (IBAction)forgotPwdBtnPressed:(id)sender

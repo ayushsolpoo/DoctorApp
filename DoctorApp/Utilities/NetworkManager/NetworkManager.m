@@ -90,7 +90,8 @@ static NetworkManager *manager;
     
     NSError *error;
     NSString *jsonString = @"";
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:postData
+    
+     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:postData
                                                        options:NSJSONWritingPrettyPrinted // Pass 0 if you don't care about the readability of the generated string
                                                          error:&error];
     
@@ -360,7 +361,6 @@ static NetworkManager *manager;
         ++wifiCheckCount;
         [self isConnectedToWiFi];
     }
-    
     return success;
 }
 
@@ -385,7 +385,5 @@ static NetworkManager *manager;
     [internetReach stopNotifier];
     return isInternetAvailable;
 }
-
-
 
 @end

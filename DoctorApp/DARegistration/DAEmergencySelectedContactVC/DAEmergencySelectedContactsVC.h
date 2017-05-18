@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DAEmergencySelectedContactsVC : UIViewController
+@interface DAEmergencySelectedContactsVC : UIViewController<UIAlertViewDelegate>
 
 @property(nonatomic,copy)NSArray *contactsArray;
 @end

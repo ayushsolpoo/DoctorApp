@@ -9,8 +9,6 @@
 #import "DAOtpVC.h"
 #import "DAEmergencyContactsVC.h"
 
-
-
 @interface DAOtpVC ()<UITextFieldDelegate>
 
 - (IBAction)verifyBtnPressed:(id)sender;
@@ -19,19 +17,37 @@
 @property (weak, nonatomic) IBOutlet UITextField *thirsDigit;
 @property (weak, nonatomic) IBOutlet UITextField *forthDigit;
 
+
 @end
 
 @implementation DAOtpVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSLog(@"otp==%@",_otpstr);
+    NSLog(@"idstr==%@",_paisentIDstr);
+    [self setbtnshadow];
     // Do any additional setup after loading the view.
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    self.navigationController.navigationBar.hidden = YES;
+}
 
+#pragma Mark:-
+#pragma Mark:
 
+-(void)setbtnshadow
+{
+    varifybtn.layer.cornerRadius = 15.0;
+    varifybtn.layer.shadowColor = [UIColor blackColor].CGColor;
+    varifybtn.layer.shadowOffset = CGSizeMake(3, 3);
+    varifybtn.layer.shadowRadius = 5;
+    varifybtn.layer.shadowOpacity = 0.3;
 
-
+}
 //TODO:TEXTFIELD DELEGATE METHODS
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
@@ -93,13 +109,18 @@
 - (IBAction)verifyBtnPressed:(id)sender
 {
     [SVProgressHUD show];
-    DAEmergencyContactsVC *eVC = [self.storyboard instantiateViewControllerWithIdentifier:@"DAEmergencyContactsVC"];
-    [self.navigationController showViewController:eVC sender:self];
-
-    return;
+//    DAEmergencyContactsVC *eVC = [self.storyboard instantiateViewControllerWithIdentifier:@"DAEmergencyContactsVC"];
+//    [self.navigationController showViewController:eVC sender:self];
+//
+//    return;
     NSString *urlString = [NSString stringWithFormat:@"%@%@",BASE_URL,OTP_VERIFICATION];
     NSString *otp = [NSString stringWithFormat:@"%@%@%@%@",_firstDigit.text,_secondDigit.text,_thirsDigit.text,_forthDigit.text];
-    NSMutableDictionary *paramDict = [[NSMutableDictionary alloc]initWithObjectsAndKeys:@"123",@"patient_id",[otp intValue],@"otp", nil];
+    
+    NSDictionary * paramDict = @{
+                                 @"id":[NSNumber numberWithInt:_paisentIDstr.intValue],
+                                 @"otp":[NSNumber numberWithInt:[_otpstr intValue]],
+                                 };
+//    NSMutableDictionary *paramDict = [[NSMutableDictionary alloc]initWithObjectsAndKeys:@"123",@"patient_id",[otp intValue],@"otp", nil];
     
     [[NetworkManager sharedManager] requestApiWithName:urlString requestType:kHTTPMethodPOST postData:paramDict callBackBlock:^(id response, NSError *error) {
         NSDictionary *dictionary = nil;
@@ -109,9 +130,10 @@
         {
             dictionary = [[NSDictionary alloc]initWithDictionary:response];
             
-            if ([[dictionary objectForKey:@"error"] intValue])
+            if ([[dictionary objectForKey:@"error"] intValue] == 0)
             {
-                [[NSUserDefaults standardUserDefaults] setObject:dictionary forKey:@"user_info"];
+                NSLog(@"varificationresponse==%@",dictionary);
+                //[[NSUserDefaults standardUserDefaults] setObject:dictionary forKey:@"user_info"];
                 
                 DAEmergencyContactsVC *eVC = [self.storyboard instantiateViewControllerWithIdentifier:@"DAEmergencyContactsVC"];
                 [self.navigationController showViewController:eVC sender:self];

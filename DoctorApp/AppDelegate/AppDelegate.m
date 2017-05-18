@@ -24,6 +24,13 @@
     // Override point for customization after application launch.
     
     
+#pragma mark: localnotification:-
+   //-----------------------------------------------------------------------------------------//
+    if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)]) {
+        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeSound|UIUserNotificationTypeBadge categories:nil]];
+    }
+
+    //------------------------------------------------------------------------------------------//
     [Fabric with:@[[Crashlytics class]]];
      [FBSDKAppEvents activateApp];
     // Configure tracker from GoogleService-Info.plist.
@@ -92,6 +99,19 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    
+//    UIBackgroundTaskIdentifier bgTask =0;
+//    UIApplication  *app = [UIApplication sharedApplication];
+//    bgTask = [app beginBackgroundTaskWithExpirationHandler:^{
+//        [app endBackgroundTask:bgTask];
+//    }];
+//    
+//    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:1.0
+//                                                      target:self
+//                                                    selector:@selector(timerCountDown:)
+//                                                    userInfo:nil
+//                                                     repeats:YES];
 }
 
 
@@ -102,6 +122,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        [[UIApplication sharedApplication] cancelAllLocalNotifications];
 }
 
 
@@ -109,6 +130,21 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
+}
+
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    UIApplicationState state = [application applicationState];
+    if (state == UIApplicationStateActive)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Reminder" message:notification.alertBody
+                                                       delegate:self cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        //application.applicationIconBadgeNumber = 0;
+    }
+    application.applicationIconBadgeNumber = 0;
 }
 
 
@@ -156,5 +192,62 @@
         abort();
     }
 }
+
+#pragma mark - Core Data stack
+
+-(NSManagedObjectContext *)managedObjectContext{
+    
+    if (_managedObjectContext != nil) {
+        return _managedObjectContext;
+    }
+    
+    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+    
+    if (coordinator !=nil) {
+        _managedObjectContext = [[NSManagedObjectContext alloc]init];
+        [_managedObjectContext setPersistentStoreCoordinator:coordinator];
+    }
+    return _managedObjectContext;
+}
+
+-(NSPersistentStoreCoordinator *)persistentStoreCoordinator{
+    
+    if (_persistentStoreCoordinator != nil) {
+        return _persistentStoreCoordinator;
+    }
+    
+    NSURL *storeURL = [[self applicationDocumentsDirectory]URLByAppendingPathComponent:@"myMetaData.sqlite"];
+    NSError *error = nil;
+    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc]initWithManagedObjectModel:[self managedObjectModel]];
+    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+        NSLog(@"Unsolved error %@,%@",error,[error userInfo]);
+        abort();
+    }
+    return _persistentStoreCoordinator;
+}
+
+-(NSManagedObjectModel *)managedObjectModel{
+    
+    if (_managedObjectModel != nil) {
+        return _managedObjectModel;
+    }
+    NSURL *modeURL = [[NSBundle mainBundle]URLForResource:@"DoctorApp" withExtension:@"momd"];
+    _managedObjectModel = [[NSManagedObjectModel alloc]initWithContentsOfURL:modeURL];
+    return  _managedObjectModel;
+}
+
+-(NSURL *)applicationDocumentsDirectory{
+    
+    NSArray *array = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    
+    NSString *path = [array objectAtIndex:0];
+    
+    NSURL *url = [NSURL fileURLWithPath:path];
+    //    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+    return url;
+    
+    
+}
+
 
 @end

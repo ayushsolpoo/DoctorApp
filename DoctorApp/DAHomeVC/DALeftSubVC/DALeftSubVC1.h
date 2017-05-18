@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DALeftSubVC1 : UIViewController
+@interface DALeftSubVC1 : UIViewController<UITableViewDelegate,UITableViewDataSource>
 
 @end

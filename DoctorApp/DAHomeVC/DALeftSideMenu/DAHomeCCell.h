@@ -11,5 +11,8 @@
 @interface DAHomeCCell : UICollectionViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *slideImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *appointmentimg;
+@property (weak, nonatomic) IBOutlet UILabel *applbl;
+@property (weak, nonatomic) IBOutlet UIView *_backview;
 
 @end

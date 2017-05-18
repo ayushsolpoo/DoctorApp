@@ -10,4 +10,10 @@
 
 @interface DAOtpVC : UIViewController
 
+{
+    
+    __weak IBOutlet UIButton *varifybtn;
+}
+@property (strong, nonatomic) NSString *otpstr;
+@property (strong, nonatomic) NSString *paisentIDstr;
 @end

@@ -8,13 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DASignUpVC : UIViewController
-
-
-
-
-
-
-
-
+@interface DASignUpVC : UIViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+{
+    __weak IBOutlet UIButton *signupbtn;
+    __weak IBOutlet UIButton *facebookbtn;
+    
+}
 @end

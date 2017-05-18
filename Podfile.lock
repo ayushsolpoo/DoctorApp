@@ -14,6 +14,8 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
+  - Applozic (3.8.6):
+    - SDWebImage (~> 3.8)
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
     - Bolts/Tasks (= 1.8.4)
@@ -48,9 +50,13 @@ PODS:
     - GoogleToolboxForMac/Defines (= 2.1.1)
   - JTCalendar (2.1.9)
   - Reachability (3.2)
+  - SDWebImage (3.8.2):
+    - SDWebImage/Core (= 3.8.2)
+  - SDWebImage/Core (3.8.2)
 
 DEPENDENCIES:
   - AFNetworking
+  - Applozic (~> 3.8)
   - Crashlytics
   - Fabric
   - FBSDKCoreKit
@@ -62,6 +68,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  Applozic: 5d98ff2c63921ef0493e173e80253f652af99578
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   Crashlytics: 79e236942ca1e7fc641df1feb9a275360a78ab6a
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
@@ -76,7 +83,8 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   JTCalendar: beb2f4c1b639bf6880f680b4858227acf83a049c
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
 
-PODFILE CHECKSUM: f37f8f5f0ac2a03346d8fd89245f72e2070e4c94
+PODFILE CHECKSUM: 2d89322444aea2f8dcd814232d1cd517384edddb
 
 COCOAPODS: 1.2.1

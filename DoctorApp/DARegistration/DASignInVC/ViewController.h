@@ -9,22 +9,17 @@
 #import <UIKit/UIKit.h>
 
 @interface ViewController : UIViewController<UITextFieldDelegate>
+{
+    __weak IBOutlet UIButton *submitbutton;
+    __weak IBOutlet UIButton *facebookbtn;
+}
 
 @property (weak, nonatomic) IBOutlet UITextField *textFieldEmail;
 @property (weak, nonatomic) IBOutlet UITextField *textFieldPas;
-
 - (IBAction)submitBtnPressed:(id)sender;
-
 - (IBAction)cancelBtnPressed:(id)sender;
 - (IBAction)loginWithFbBtnPressed:(id)sender;
 - (IBAction)newUserBtnPressed:(id)sender;
 - (IBAction)forgotPwdBtnPressed:(id)sender;
-
-
-
-
-
-
-
 @end
 

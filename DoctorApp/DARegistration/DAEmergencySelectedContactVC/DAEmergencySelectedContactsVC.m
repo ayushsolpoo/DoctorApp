@@ -78,29 +78,48 @@
 - (IBAction)saveBtnPressed:(id)sender
 {
     NSString *urlString = [NSString stringWithFormat:@"%@%@",BASE_URL,SAVE_EMERGENCY_CONTACTS];
-    NSDictionary *paramDict = @{@"contact1":[_contactsArray[0] valueForKey:@"fullName"],@"number1":[[_contactsArray[0] valueForKey:@"PhoneNumbers"] objectAtIndex:0],@"contact2":[_contactsArray[1] valueForKey:@"fullName"],[[_contactsArray[1] valueForKey:@"PhoneNumbers"] objectAtIndex:0]:@"",@"contact3":[_contactsArray[2] valueForKey:@"fullName"],@"number3":[[_contactsArray[2] valueForKey:@"PhoneNumbers"] objectAtIndex:0],@"id":@"12345"};
+    NSDictionary *paramDict = @{
+                                @"contact1":[_contactsArray[0] valueForKey:@"fullName"],
+                                @"number1":[[_contactsArray[0] valueForKey:@"PhoneNumbers"] objectAtIndex:0],
+                                @"contact2":[_contactsArray[1] valueForKey:@"fullName"],
+                                @"number2":[[_contactsArray[1] valueForKey:@"PhoneNumbers"] objectAtIndex:0],
+                                @"contact3":[_contactsArray[2] valueForKey:@"fullName"],
+                                @"number3":[[_contactsArray[2] valueForKey:@"PhoneNumbers"] objectAtIndex:0],
+                                @"id":@"12345"};
     
     [[NetworkManager sharedManager] requestApiWithName:urlString requestType:kHTTPMethodPOST postData:paramDict callBackBlock:^(id response, NSError *error) {
         if (response) {
             NSDictionary *responseDict = [[NSDictionary alloc]initWithDictionary:response];
             
-            if ([[responseDict objectForKey:@"error"] intValue] != 0)
+            if ([[responseDict objectForKey:@"error"] intValue] == 0)
             {
                 UIAlertController *alertC = [UIAlertController alertControllerWithTitle:CONGRATULATION message:SAVED_CONTACTS preferredStyle:UIAlertControllerStyleAlert];
-                UIAlertAction *action = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                    DAHomeVC *homeVC = [self.storyboard instantiateViewControllerWithIdentifier:@"DAHomeVC"];
-                    [self.navigationController showViewController:homeVC sender:self];
-                }];
                 
-                [alertC addAction:action];
-            }
-            
-            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:CONGRATULATION message:SAVED_CONTACTS delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+                alert.delegate = self;
+                [alert show];
+                
         }
         else if(error)
         {
             NSLog(@"the error is %@",[error localizedDescription]);
         }
+        }
     }];
+}
+
+- (void)alertView:(UIAlertView *)alertView
+clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == [alertView cancelButtonIndex]){
+        //cancel clicked ...do your action
+    }else{
+        
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Appointment" bundle:nil];
+        DAHomeVC *initialViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"DAHomeVC"];
+        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:initialViewController];
+        self.view.window.rootViewController = nav;
+
+        
+    }
 }
 @end
