@@ -7,10 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-
-
-
-
 @interface DAAppointmentListVC : UIViewController
 
 @end

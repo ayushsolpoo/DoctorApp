@@ -13,6 +13,8 @@
 #import "FacebookHelper.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import "DAHomeVC.h"
+#import "SWRevealViewController.h"
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @property (weak, nonatomic) IBOutlet UITextField *pasTextField;
@@ -20,17 +22,19 @@
 
 @implementation ViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     [self setleftimages];
-   
-    
+    _textFieldEmail.text = @"demo@gmail.com";
+    _textFieldPas.text = @"123456789";
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
      self.navigationController.navigationBar.hidden = YES;
 }
+
 
 #pragma mark : Log in with facebook
 -(void)fbButtonClicked{
@@ -85,41 +89,52 @@
 
 - (IBAction)submitBtnPressed:(id)sender
 {
-    UIButton *button = (UIButton *)sender;
-    button.enabled = NO;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        button.enabled = YES;
-    });
-    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,25}";
-    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
-    
-    if([_emailTextField.text isEqualToString:@""] || [_pasTextField.text isEqualToString:@""])
+    NSString *errorMessage = [self validateForm];
+    if (errorMessage)
     {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Meassage" message:errorMessage delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+        [alert show];
+        return;
     }
-    else if (![emailTest evaluateWithObject:_emailTextField.text]) {
-    }
-    
     else
     {
         [self signIn];
-        
     }
-
-//    DASignUpVC *signUp = [self.storyboard instantiateViewControllerWithIdentifier:@"DASignUpVC"];
-//    [self.navigationController showViewController:signUp sender:self];
-
-/*
- [[NetworkManager sharedManager] requestApiWithName:urlString requestType:kHTTPMethodGET postData:nil callBackBlock:^(id response, NSError *error)
- {
-
- */
 }
+#pragma Mark:
+#pragma Mark AllTextField Validations:-
+    
+- (NSString *)validateForm {
+    NSString *errorMessage = nil;
+    NSString *regex = @"[^@]+@[A-Za-z0-9.-]+\\.[A-Za-z]+";
+    NSPredicate *emailPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    if (![emailPredicate evaluateWithObject:_emailTextField.text] == YES)
+    {
+       errorMessage = @"Please Enter Your Valid Email ID";
+    }
+    
+   else if (!(_emailTextField.text.length >= 1)){
+        errorMessage = @"Please Enter Your Email ID";
+    }
+    
+    else if (!(_pasTextField.text.length >= 1)){
+        errorMessage = @"Please enter Your Password";
+    }
+    return errorMessage;
+}
+
 
 -(void)signIn
 {
+    NSLog(@"jjj%@",[[NSUserDefaults standardUserDefaults]
+                    stringForKey:@"APITOCKEN"]);
+    
     [SVProgressHUD show];
     NSString * urlString = [NSString stringWithFormat:@"%@%@",BASE_URL,LOGIN];
-    NSDictionary * paramDict = @{@"email":[NSString stringWithFormat:@"%@",_emailTextField.text],@"password":[NSString stringWithFormat:@"%@",_pasTextField.text],@"device_token":@"78374646",@"registration_token":@"4345455"};
+    
+    NSDictionary * paramDict = @{@"email":[NSString stringWithFormat:@"%@",_emailTextField.text],@"password":[NSString stringWithFormat:@"%@",_pasTextField.text],@"device_token":@"78374646",@"registration_token":
+                                     [[NSUserDefaults standardUserDefaults]
+                                                                                                                                                                                                        stringForKey:@"APITOCKEN"]};
     //device_token,registration_token
     
     [[NetworkManager sharedManager] requestApiWithName:urlString requestType:kHTTPMethodPOST postData:paramDict callBackBlock:^(id response, NSError *error)
@@ -132,18 +147,28 @@
          [SVProgressHUD show];
          if (!error)
          {
-             
              if (dictionary)
              {
-              
                  [SVProgressHUD dismiss];
-                 if ([[dictionary objectForKey:@"message"] isEqualToString:@"Email does not found."])
+             if ([[dictionary objectForKey:@"message"] isEqualToString:@"Email does not found."])
+             {
+                 UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Invalid Email id! " message:[dictionary objectForKey:@"reason"] preferredStyle:UIAlertControllerStyleAlert];
+                 [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                     // action 1
+                 }]];
+                 [self presentViewController:alertController animated:YES completion:nil];
+                 }else
                  {
-                     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Invalid Email id! " message:[dictionary objectForKey:@"reason"] preferredStyle:UIAlertControllerStyleAlert];
-                     [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-                         // action 1
-                     }]];
-                     [self presentViewController:alertController animated:YES completion:nil];
+//                     DAOtpVC *otp = [self.storyboard instantiateViewControllerWithIdentifier:@"DAOtpVC"];
+//                     otp.otpstr = [[dictionary objectForKey:@"data"] objectForKey:@"otp"];
+//                     otp.paisentIDstr = [[dictionary objectForKey:@"data"] objectForKey:@"id"];
+//                     [self.navigationController showViewController:otp sender:self];
+//
+             UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Appointment" bundle:nil];
+             SWRevealViewController *initialViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"revel"];
+                 [self.navigationController pushViewController:initialViewController animated:YES];
+//                 UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:initialViewController];
+//                 self.view.window.rootViewController = nav;
                  }
              }
              else
@@ -152,11 +177,11 @@
                  [self showErrorMessage];
              }
          }
-         else
-         {
-             [SVProgressHUD dismiss];
-             [self showErrorMessage:error];
-         }
+             else
+             {
+                 [SVProgressHUD dismiss];
+                 [self showErrorMessage:error];
+             }
      }];
 }
 
@@ -176,21 +201,16 @@
     }
     else
     {
-        
         header =@"Sorry!";
         
         text = @"We are unable to process your request. Please try again.";
         
     }
-    
-
-    
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:header message:text preferredStyle:UIAlertControllerStyleAlert];
     [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         // action 1
     }]];
     [self presentViewController:alertController animated:YES completion:nil];
-
 }
 
 - (void)showErrorMessage
@@ -212,9 +232,6 @@
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
-- (IBAction)cancelBtnPressed:(id)sender {
-}
-
 - (IBAction)loginWithFbBtnPressed:(id)sender {
     [self fbButtonClicked];
 }
@@ -223,13 +240,10 @@
 {
     DASignUpVC *signUp = [self.storyboard instantiateViewControllerWithIdentifier:@"DASignUpVC"];
     [self.navigationController showViewController:signUp sender:self];
-    
 }
 
 - (IBAction)forgotPwdBtnPressed:(id)sender
 {
     
 }
-
-
 @end

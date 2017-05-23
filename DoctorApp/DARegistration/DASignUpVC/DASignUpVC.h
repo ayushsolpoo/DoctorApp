@@ -12,6 +12,6 @@
 {
     __weak IBOutlet UIButton *signupbtn;
     __weak IBOutlet UIButton *facebookbtn;
-    
+    NSDictionary *dictionary;
 }
 @end

@@ -99,6 +99,7 @@ static NetworkManager *manager;
         NSLog(@"Got an error: %@", error);
     } else {
         jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        NSLog(@"GET Data==: %@",postData);
     }
     
     //NSAssert Statements

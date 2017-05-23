@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface DALeftSubVC1 : UIViewController<UITableViewDelegate,UITableViewDataSource>
+{
+    NSArray *arr;
+}
 
 @end

@@ -273,13 +273,12 @@
         if(!error)
         {
             self.chatLauncher = [[ALChatLauncher alloc] initWithApplicationId:[self getApplicationKey]];
-            
             NSString * deviceKey = [ALUserDefaultsHandler getDeviceKeyString];
             NSLog(@"DEVICE_KEY : %@",deviceKey);
             if(deviceKey != nil)
             {
                 ALConversationProxy * finalProxy = [self makeFinalProxyWithGeneratedProxy:alConversationProxy andFinalProxy:proxyObject];
-                [self.chatLauncher launchIndividualContextChat:finalProxy andViewControllerObject:fromViewController userDisplayName:@"Adarsh" andWithText:nil];
+                [self.chatLauncher launchIndividualContextChat:finalProxy andViewControllerObject:fromViewController userDisplayName:@"Saumya" andWithText:nil];
             }
         }
     }];
@@ -645,5 +644,4 @@
     //    ALChatViewController * chatVC = (ALChatViewController *)chatView;
     //    [chatVC presentViewController:customView animated:YES completion:nil];
 }
-
 @end

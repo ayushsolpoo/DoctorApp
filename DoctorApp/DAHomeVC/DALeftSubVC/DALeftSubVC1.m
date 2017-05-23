@@ -16,6 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    arr = [[NSArray alloc]initWithObjects:@"PROFILE",@"SEARCH PHARMACY STORE",@"INVITE FRIEND AND FAMILY",@"PAYMENT",@"ABOUT APP",@"HELP",@"SETTINGS", nil];
 }
 
 #pragma mark - Table view data source
@@ -27,14 +28,17 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return arr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
-    cell.textLabel.text = @"Solpoo";
-    
+    cell.textLabel.text = [arr objectAtIndex:indexPath.row];
+    cell.textLabel.font = [UIFont systemFontOfSize:14.0];
+    cell.backgroundColor = [UIColor clearColor];
+    cell.textLabel.textColor = [UIColor whiteColor];
+    cell.imageView.image = [UIImage imageNamed:@"mobile_icon.png"];
     return cell;
 }
 

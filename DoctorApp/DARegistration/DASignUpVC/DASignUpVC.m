@@ -32,12 +32,8 @@ bool keyboardIsShown = false;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setleftimages];
+    [self createroundimages];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
-    [_profileImageView setImage:[UIImage imageNamed:@"profile_bg.png"]];
-    _profileImageView.layer.cornerRadius  = _profileImageView.frame.size.height /2;
-    _profileImageView.layer.masksToBounds = YES;
-    _profileImageView.layer.borderWidth   = 0;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -47,6 +43,7 @@ bool keyboardIsShown = false;
 
 -(void)setleftimages
 {
+    
     _textFieldName.leftViewMode = UITextFieldViewModeAlways;
     _textFieldName
     .leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"user_icon.png"]];
@@ -80,19 +77,12 @@ bool keyboardIsShown = false;
 
 - (IBAction)submitBtnPressed:(id)sender
 {
-    UIButton *button = (UIButton *)sender;
-    button.enabled = NO;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        button.enabled = YES;
-    });
-    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,25}";
-    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
-    
-    if([_textFieldName.text isEqualToString:@""] || [_textFieldEmail.text isEqualToString:@""]|| [_textFieldPas.text isEqualToString:@""]|| [_textFieldMobileNo.text isEqualToString:@""])
+    NSString *errorMessage = [self validateForm];
+    if (errorMessage)
     {
-    }
-    else if (![emailTest evaluateWithObject:_textFieldEmail.text]) {
-        
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Meassage" message:errorMessage delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+        [alert show];
+        return;
     }
     else
     {
@@ -100,6 +90,8 @@ bool keyboardIsShown = false;
     }
 }
 
+#pragma Mark:-
+#pragma Mark hitapifrom server:-
 -(void)signUp
 {
     [SVProgressHUD show];
@@ -110,33 +102,20 @@ bool keyboardIsShown = false;
     NSData* imgData = [self getImageData:abc];//[_serverResponse getImageData:i.image];
     NSLog(@"Image Size: %lu", (unsigned long)imgData.length);
     NSString     *postimagestr  = [NSString stringWithFormat:@"%@",[BaseSixtyFour encode:imgData]];
-    
-
     int ii = 1;
+    
     NSDictionary * paramDict = @{
                                  @"email":[NSString stringWithFormat:@"%@",_textFieldEmail.text],
                                 @"password":[NSString stringWithFormat:@"%@",_textFieldPas.text],
                                  @"name":[NSString stringWithFormat:@"%@",_textFieldName.text],
                                  @"number":[NSString stringWithFormat:@"%@",_textFieldMobileNo.text],
                                  @"doctor_id":[NSNumber numberWithInt:ii],
-                                 @"ProfileImg":postimagestr
+                                 @"ProfileImg":postimagestr == nil ? @"nil": postimagestr
                                  };
-    
-    
-//    NSString *paramDict = [NSString stringWithFormat:
-//                        @"{\"email\": \"%@\",\"password\": \"%@\",\"name\": \"%@\",\"number\": \"%@\",\"doctor_id\": \"%d\",\"ProfileImg\": \"%@\"}",
-//                        _textFieldEmail.text,
-//                        _textFieldPas.text,
-//                        _textFieldName.text,
-//                        _textFieldMobileNo.text,
-//                        123456,postimagestr
-//                        ];
-    
-   // NSString *str = [log_in_string stringByAppendingString:@"]}"];
     
     [[NetworkManager sharedManager] requestApiWithName:urlString requestType:kHTTPMethodPOST postData:paramDict callBackBlock:^(id response, NSError *error)
      {
-         NSDictionary *dictionary = nil;;
+         dictionary = nil;;
          if (response)
          {
              dictionary = [[NSDictionary alloc] initWithDictionary:response];
@@ -149,6 +128,7 @@ bool keyboardIsShown = false;
              {
                  if ([dictionary objectForKey:@"OTP"])
                  {
+                 [self savedatainNsuserDefult]; //save Tocken
                  DAOtpVC *otp = [self.storyboard instantiateViewControllerWithIdentifier:@"DAOtpVC"];
                  otp.otpstr = [[dictionary objectForKey:@"data"] objectForKey:@"otp"];
                  otp.paisentIDstr = [[dictionary objectForKey:@"data"] objectForKey:@"id"];
@@ -156,11 +136,11 @@ bool keyboardIsShown = false;
                  }
                  else
                  {
-                     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:SORRY message:[dictionary objectForKey:@"message"] preferredStyle:UIAlertControllerStyleAlert];
-                     [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-                         // action 1
-                     }]];
-                     [self presentViewController:alertController animated:YES completion:nil];
+                 UIAlertController *alertController = [UIAlertController alertControllerWithTitle:SORRY message:[dictionary objectForKey:@"message"] preferredStyle:UIAlertControllerStyleAlert];
+                 [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                     // action 1
+                 }]];
+                 [self presentViewController:alertController animated:YES completion:nil];
                  }
              }
              else
@@ -199,7 +179,6 @@ bool keyboardIsShown = false;
     }
     else
     {
-        
         header =@"Sorry!";
         
         text = @"We are unable to process your request. Please try again.";
@@ -215,7 +194,6 @@ bool keyboardIsShown = false;
 
 - (void)showErrorMessage
 {
-    
     NSString *header;
     
     NSString *text;
@@ -342,10 +320,136 @@ bool keyboardIsShown = false;
     }
     return dt;
 }
+
 - (IBAction)_backbuttonAction:(id)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+#pragma Mark:-
+#pragma  Mark createroundimages:-
 
+-(void)createroundimages
+{
+    CAShapeLayer *maskLayer = [CAShapeLayer layer];
+    maskLayer.fillRule = kCAFillRuleEvenOdd;
+    maskLayer.frame = _profileImageView.bounds;
+    
+    CGFloat width = _profileImageView.frame.size.width;
+    CGFloat height = _profileImageView.frame.size.height;
+    CGFloat hPadding = width * 1 / 8 / 2;
+    
+    UIGraphicsBeginImageContext(_profileImageView.frame.size);
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    [path moveToPoint:CGPointMake(width/2, 0)];
+    [path addLineToPoint:CGPointMake(width - hPadding, height / 4)];
+    [path addLineToPoint:CGPointMake(width - hPadding, height * 3 / 4)];
+    [path addLineToPoint:CGPointMake(width / 2, height)];
+    [path addLineToPoint:CGPointMake(hPadding, height * 3 / 4)];
+    [path addLineToPoint:CGPointMake(hPadding, height / 4)];
+    [path closePath];
+    [path closePath];
+    [path fill];
+    [path stroke];
+    
+    maskLayer.path = path.CGPath;
+    UIGraphicsEndImageContext();
+    
+    _profileImageView.layer.mask = maskLayer;
+    _profileImageView.image=[UIImage imageNamed:@"profile.png"];
+}
+
+#pragma Mark:
+#pragma Mark AllTextField Validations:-
+
+- (NSString *)validateForm {
+    NSString *errorMessage = nil;
+    
+    
+    NSString *regex = @"[^@]+@[A-Za-z0-9.-]+\\.[A-Za-z]+";
+    NSPredicate *emailPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    
+    //    if (!([_titleTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""].length >= 1)) {
+    //        errorMessage = @"Please enter Your Title name";
+    //    }
+    if (!(_textFieldName.text.length >= 1)){
+        errorMessage = @"Please Enter Your Name";
+    }
+    
+    else if (!([_textFieldName.text stringByReplacingOccurrencesOfString:@" " withString:@""].length >= 1)) {
+        errorMessage = @"Please enter Your name";
+    }
+    
+     else if (!(_textFieldMobileNo.text.length >= 11)){
+        errorMessage = @"Please enter your correct mob no.";
+    }
+    
+    else if (!(_textFieldPas.text.length >= 1)){
+        errorMessage = @"Please enter Your  password ";
+    }
+    
+    else if (!(_textFieldEmail.text.length >= 1)){
+        errorMessage = @"Please enter Your  email address ";
+    }
+    
+    //else if (![emailPredicate evaluateWithObject:_loginUserIDTextfield.text]){
+    else if(![emailPredicate evaluateWithObject:_textFieldEmail]){
+        errorMessage = @"Please enter a valid email address";
+    }
+    
+      return errorMessage;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField == _textFieldPas)
+    {
+        if ([[[textField textInputMode] primaryLanguage] isEqualToString:@"emoji"] || ![[textField textInputMode] primaryLanguage])
+            return NO;
+        else
+            return YES;
+    }
+    
+    if (_textFieldMobileNo
+        == textField && string.length > 0) {
+        if(_textFieldMobileNo.text.length < 11 )
+            return YES;
+        return NO;
+    }
+    
+    
+    
+    if (_textFieldName == textField && string.length > 0)
+    {
+        if(!(([string characterAtIndex:0] >= 'a' && [string characterAtIndex:0] <= 'z') ||
+             ([string characterAtIndex:0] >= 'A' && [string characterAtIndex:0] <= 'Z')||[string isEqualToString:@" "]))
+        {
+            //([string characterAtIndex:0] >= '0' && [string characterAtIndex:0] <= '9'))){
+            return NO;
+        }
+    }
+    
+    if ([self validateForm] == nil) {
+        //_signUP.layer.borderWidth=1.0f;
+        //_signUP.layer.borderColor=[[UIColor orangeColor] CGColor];
+        //_signUP.titleLabel.textColor = [UIColor orangeColor];
+    }
+    else
+    {
+        //_signUP.layer.borderWidth=1.0f;
+        //_signUP.layer.borderColor=[[UIColor clearColor] CGColor];
+        //_signUP.titleLabel.textColor = [UIColor lightGrayColor];
+    }
+    return YES;
+}
+
+
+#pragma Mark:-
+#pragma Mark save response in NSUserDefult:-
+-(void)savedatainNsuserDefult
+{
+    [[NSUserDefaults standardUserDefaults] setObject:[[dictionary objectForKey:@"data"] objectForKey:@"api_token"] forKey:@"APITOCKEN"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
+}
 @end

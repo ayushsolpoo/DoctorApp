@@ -16,8 +16,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *secondDigit;
 @property (weak, nonatomic) IBOutlet UITextField *thirsDigit;
 @property (weak, nonatomic) IBOutlet UITextField *forthDigit;
-
-
 @end
 
 @implementation DAOtpVC
@@ -115,6 +113,7 @@
 //    return;
     NSString *urlString = [NSString stringWithFormat:@"%@%@",BASE_URL,OTP_VERIFICATION];
     NSString *otp = [NSString stringWithFormat:@"%@%@%@%@",_firstDigit.text,_secondDigit.text,_thirsDigit.text,_forthDigit.text];
+    
     
     NSDictionary * paramDict = @{
                                  @"id":[NSNumber numberWithInt:_paisentIDstr.intValue],

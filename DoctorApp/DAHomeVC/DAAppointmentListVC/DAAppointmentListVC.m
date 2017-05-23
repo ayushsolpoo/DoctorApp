@@ -9,19 +9,14 @@
 #import "DAAppointmentListVC.h"
 #import "DAClinicListVC.h"
 
-
 @interface DAAppointmentTableViewcell : UITableViewCell
-
 @property (strong, nonatomic) IBOutlet UILabel *lblDoctorName;
 @property (strong, nonatomic) IBOutlet UILabel *lblDiesesName;
 @property (strong, nonatomic) IBOutlet UILabel *lblTimeSlot;
-
+@property (weak, nonatomic) IBOutlet UIView *appoimentbackview;
 
 @end
 @implementation DAAppointmentTableViewcell
-
-
-
 @end
 
 @interface DAAppointmentListVC ()<UITableViewDataSource,UITableViewDelegate>
@@ -44,9 +39,7 @@
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
     appointmentArray = [[NSMutableArray alloc]initWithCapacity:0];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
     [self performSelector:@selector(getAppointmentList) withObject:nil afterDelay:0.0];
-    
 }
 
 //TODO: GET APPOINTMENT LIST
@@ -78,7 +71,7 @@
             if (![[responseDict objectForKey:@"error"] intValue])
             {
                 appointmentArray = [DAGlobal checkNullArray:[[[responseDict objectForKey:@"data"] objectAtIndex:0] objectForKey:@"appoint_ment_list"]];
-                                   [_appointmentListTableView reloadData];
+                  [_appointmentListTableView reloadData];
             }
         }
         else if (error)
@@ -89,7 +82,7 @@
 }
 
 
-//TODO: TABLE VIEW DATA SOURCE METHODS
+//TODO: TABLE VIEW DATA SOURCE METHODS //Rohit
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -99,12 +92,18 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     DAAppointmentTableViewcell *cell = [tableView dequeueReusableCellWithIdentifier:@"AppointmentTableViewCell"];
+    
+    cell.appoimentbackview.layer.shadowColor = [UIColor blackColor].CGColor;
+    cell.appoimentbackview.layer.shadowOffset = CGSizeMake(2, 2);
+    //cell.appoimentbackview.layer.shadowRadius = 5;
+    cell.appoimentbackview.layer.shadowOpacity = 0.3;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     [cell.lblDoctorName setText:[[[[appointmentArray  objectAtIndex:indexPath.row] objectForKey:@"patient_appoint_ment_slot"] objectForKey:@"patient_appointment_clinic"] objectForKey:@"clinicName"]];
 
     [cell.lblDiesesName setText:[[[[appointmentArray  objectAtIndex:indexPath.row] objectForKey:@"patient_appoint_ment_slot"] objectForKey:@"patient_appointment_clinic"] objectForKey:@"landMark"]];
     [cell.lblTimeSlot setText:[[[[appointmentArray  objectAtIndex:indexPath.row] objectForKey:@"patient_appoint_ment_slot"] objectForKey:@"patient_appointment_clinic"] objectForKey:@"landMark"]];
     return cell;
-    
 }
 //TODO:Outlets
 - (IBAction)BackBtnTapped:(id)sender

@@ -34,9 +34,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    //    [self mLaunchChatList:self];
-    
     
     if([ALUserDefaultsHandler isLoggedIn])
     {
@@ -45,32 +42,38 @@
             
         }];
     }
-
-    
     ALUser * user = [[ALUser alloc] init];
-    [user setUserId:@"hello singh"];
-    [user setEmail:@"hello@gmail.com"];
-    [user setPassword:@"1234567888"];
+    [user setUserId:@"rajat"];
+    [user setEmail:@"rajat@gmail.com"];
+    [user setPassword:@"9936511593"];
     
-    //[self.mActivityIndicator startAnimating];
     
     [ALUserDefaultsHandler setUserId:user.userId];
     [ALUserDefaultsHandler setEmailId:user.email];
     [ALUserDefaultsHandler setPassword:user.password];
-    ALChatManager * chatManager = [[ALChatManager alloc] initWithApplicationKey:@"applozic-sample-app"];
+    ALChatManager * chatManager = [[ALChatManager alloc] initWithApplicationKey:@"ebf0c93861f3349ed3f748d3c198cd92"];
     [chatManager registerUserWithCompletion:user withHandler:^(ALRegistrationResponse *rResponse, NSError *error) {
         
         if (!error)
         {
-            UIStoryboard* storyboardM = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            UIViewController *launchChat = [storyboardM instantiateViewControllerWithIdentifier:@"LaunchChatFromSimpleViewController"];
-            [self presentViewController:launchChat animated:YES completion:nil];
+            NSLog(@"jkkjkjkj");
+        }
+    
+        else
+        {
+            NSLog(@"Error in Applozic registration : %@",error.description);
         }
     }];
-
-     self.activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    self.activityView.center = self.view.center;
     
+    [_activityView startAnimating];
+    
+    ALUser *user1 = [[ALUser alloc] init];
+    [user1 setUserId:[ALUserDefaultsHandler getUserId]];
+    [user1 setEmail:[ALUserDefaultsHandler getEmailId]];
+    [user1 setPassword:@""];
+    
+    ALChatManager * chatManager1 = [[ALChatManager alloc] initWithApplicationKey:@"ebf0c93861f3349ed3f748d3c198cd92"];
+    [chatManager1 launchChatForUserWithDisplayName:@"masteruser" withGroupId:nil andwithDisplayName:@"Saumya" andFromViewController:self];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -107,58 +110,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-//===============================================================================
-// TO LAUNCH MESSAGE LIST
-//
-//===============================================================================
-
-//- (IBAction)mLaunchChatList:(id)sender {
-//
-//    if (![ALDataNetworkConnection checkDataNetworkAvailable])
-//    {
-//        [self.activityView removeFromSuperview];
-//    }
-//    else
-//    {
-//        [self.activityView startAnimating];
-//    }
-//
-//    [self.view addSubview:_activityView];
-//    ALUser *user = [[ALUser alloc] init];
-//    [user setUserId:[ALUserDefaultsHandler getUserId]];
-//    [user setEmail:[ALUserDefaultsHandler getEmailId]];
-//
-//    ALChatManager * chatManager = [[ALChatManager alloc] initWithApplicationKey:@"applozic-sample-app"];
-//    [chatManager registerUserAndLaunchChat:user andFromController:self forUser:nil withGroupId:nil];
-//
-//    //Adding sample contacts...
-//    [self insertInitialContacts];
-//}
-
-//===============================================================================
-// TO LAUNCH INDIVIDUAL CHAT
-//
-//===============================================================================
-
-//- (IBAction)mChatLaunchButton:(id)sender {
-//
-//    [self.view addSubview:_activityView];
-//    [self.activityView startAnimating];
-//
-//    ALUser * user = [[ALUser alloc] init];
-//    [user setUserId:[ALUserDefaultsHandler getUserId]];
-//    [user setEmail:[ALUserDefaultsHandler getEmailId]];
-//
-//
-//    ALChatManager * chatManager = [[ALChatManager alloc] initWithApplicationKey:@"applozic-sample-app"];
-//
-//    [self checkUserContact:@"don222" displayName:@"" withCompletion:^(ALContact * contact) {
-//
-//         [chatManager launchChatForUserWithDisplayName:contact.userId withGroupId:nil
-//                                        andwithDisplayName:contact.displayName andFromViewController:self];
-//
-//    }];
-//}
 
 -(void)checkUserContact:(NSString *)userId displayName:(NSString *)displayName withCompletion:(void(^)(ALContact * contact))completion
 {
@@ -229,7 +180,7 @@
         ALConversationProxy * newProxy = [[ALConversationProxy alloc] init];
         newProxy = [self makeupConversationDetails];
         
-        ALChatManager * chatManager = [[ALChatManager alloc] initWithApplicationKey:@"applozic-sample-app"];
+        ALChatManager * chatManager = [[ALChatManager alloc] initWithApplicationKey:@"ebf0c93861f3349ed3f748d3c198cd92"];
         [chatManager createAndLaunchChatWithSellerWithConversationProxy:newProxy fromViewController:self];
     }
     else
@@ -274,7 +225,7 @@
 {
     ALConversationProxy * alConversationProxy = [[ALConversationProxy alloc] init];
     alConversationProxy.topicId = @"laptop01";
-    alConversationProxy.userId = @"adarshk";
+    alConversationProxy.userId = @"rajat";
     
     // Note : Uncomment following two lines to set SMS fallback's format.
     /*
@@ -328,9 +279,9 @@
     
     //contact 1
     ALContact *contact1 = [[ALContact alloc] init];
-    contact1.userId = @"adarshk";
-    contact1.fullName = @"Adarsh Kumar";
-    contact1.displayName = @"Adarsh";
+    contact1.userId = @"Prashant123";
+    contact1.fullName = @"Prashant singh";
+    contact1.displayName = @"Prashant123";
     contact1.email = @"github@applozic.com";
     contact1.contactImageUrl = @"https://avatars0.githubusercontent.com/u/5002214?v=3&s=400";
     contact1.contactType= [NSNumber numberWithInt:1];
@@ -401,94 +352,6 @@
 
 -(void)subGroupCODE:(ALChatManager *)chatManager
 {
-    // CODE FOR SUBGROUP DO NOT USE IT
-    
-    //    [chatManager launchChatListWithParentKey:[NSNumber numberWithInt:213407] andFromViewController:self];
-    
-    //
-    //        ALChannelService *ss = [ALChannelService new];
-    //        [ss createChannel:@"PRD_SGRP202" andParentChannelKey:[NSNumber numberWithInt:1371169] orClientChannelKey:nil andMembersList:@[@"hi0101",@"hi0102"]
-    //             andImageLink:nil channelType:PUBLIC andMetaData:nil withCompletion:^(ALChannel *alChannel) {
-    //
-    //             }];
-    //
-    
-    //    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"SUB GROUP"
-    //                                                                              message:@"Add Parent key"
-    //                                                                       preferredStyle:UIAlertControllerStyleAlert];
-    //
-    //    [ALUtilityClass setAlertControllerFrame:alertVC andViewController:self];
-    //    [alertVC addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
-    //
-    //    [alertVC addTextFieldWithConfigurationHandler:^(UITextField *textField) {
-    //
-    //        textField.placeholder = @"Add Parent Key here...";
-    //    }];
-    //
-    //    [alertVC addAction:[UIAlertAction actionWithTitle:@"Open Group" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-    //
-    //        UITextField *textField = alertVC.textFields.firstObject;
-    //        if(textField.text.length)
-    //        {
-    //            int parentKey = [textField.text intValue];
-    //            if(parentKey)
-    //            {
-    //                [chatManager launchChatListWithParentKey:[NSNumber numberWithInt:parentKey] andFromViewController:self];
-    //            }
-    //            else
-    //            {
-    //                ALChannelService * service = [ALChannelService new];
-    //                ALChannel * channel = [service fetchChannelWithClientChannelKey:textField.text];
-    //                if(channel)
-    //                {
-    //                    [chatManager launchChatListWithParentKey:channel.key andFromViewController:self];
-    //                }
-    //                else
-    //                {
-    //                    NSLog(@"NO CHANNEL FOUND");
-    //                }
-    //            }
-    //        }
-    //    }]];
-    //
-    //    [self presentViewController:alertVC animated:YES completion:nil];
-    
-    
-    //    NSMutableArray *childList = [NSMutableArray new];
-    //    [childList addObject:[NSNumber numberWithInt:1344099]];
-    //    [childList addObject:[NSNumber numberWithInt:1344107]];
-    //    ALChannelService *ss = [ALChannelService new];
-    //    [ss updateChannel:[NSNumber numberWithInt:1344096] andNewName:nil
-    //          andImageURL:nil orClientChannelKey:nil orChildKeys:childList withCompletion:^(NSError *error) {
-    //
-    //    }];
-    
-    
-    // ADDING
-    
-    //    NSMutableArray *childList = [NSMutableArray new];
-    //    [childList addObject:[NSNumber numberWithInt:1261256]];
-    //    [childList addObject:[NSNumber numberWithInt:213407]];
-    //    ALChannelService *ss = [ALChannelService new];
-    //    [ss addChildKeyList:childList andParentKey:[NSNumber numberWithInt:1371169] withCompletion:^(id json, NSError *error) {
-    //
-    //    }];
-    
-    //    [ss removeChildKeyList:childList andParentKey:[NSNumber numberWithInt:213110] withCompletion:^(id json, NSError *error) {
-    //
-    //    }];
-    //    m2 : 1397150
-    
-    //    clinet channels
-    //    NSMutableArray *childList = [@[@"1315217",@"1321170"] mutableCopy];
-    
-    //    [ss addClientChildKeyList:childList andParentKey:@"1170818" withCompletion:^(id json, NSError *error) {
-    //
-    //    }];
-    
-    //    [ss removeClientChildKeyList:childList andParentKey:@"1170818" withCompletion:^(id json, NSError *error) {
-    //
-    //    }];
 }
 
 -(void)dealloc

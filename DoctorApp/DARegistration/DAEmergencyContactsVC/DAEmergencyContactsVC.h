@@ -10,14 +10,5 @@
 #import <Contacts/Contacts.h>
 #import <ContactsUI/ContactsUI.h>
 
-
-
-
 @interface DAEmergencyContactsVC : UIViewController
-
-
-
-
-
-
 @end
