@@ -11,9 +11,6 @@
 @interface DAReminderTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *lblReminderName;
-
-
-
 @end
 @implementation DAReminderTableViewCell
 
@@ -65,10 +62,6 @@
 {
     return arrayDataToLoad.count;
 }
-
-
-
-
 //using storyBoard
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -83,18 +76,13 @@
     else
     {
          cell.lblReminderName.text = [[arrayDataToLoad objectAtIndex:indexPath.row] objectForKey:@"testName"];
-        
     }
-    
-    
-    
      return cell;
     
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DAReminderDetailVC *bokApVc = [self.storyboard instantiateViewControllerWithIdentifier:@"DAReminderDetailVC"];
-    [self.navigationController showViewController:bokApVc sender:self];
+    
 }
 
 //TODO:Web Service functions
@@ -143,13 +131,10 @@
              else
              {
                  [SVProgressHUD dismiss];
-                 
              }
          }
-        
      }
-     ];
-
+   ];
 }
 //Segment Controller
 #pragma mark - segment control
@@ -177,5 +162,11 @@
 - (IBAction)backBtnTapped:(id)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)_addreminderbtnaction:(id)sender
+{
+    DAReminderDetailVC *bokApVc = [self.storyboard instantiateViewControllerWithIdentifier:@"DAReminderDetailVC"];
+    [self.navigationController showViewController:bokApVc sender:self];
 }
 @end

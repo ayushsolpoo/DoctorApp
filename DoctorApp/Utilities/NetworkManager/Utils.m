@@ -86,6 +86,16 @@
 	return !(netStatus == NotReachable);
 }
 
++(void)setshadowoffset:(UIView *)backview
+{
+    CALayer *iconlayer = backview.layer;
+    iconlayer.masksToBounds = NO;
+    iconlayer.cornerRadius = 8.0;
+    iconlayer.shadowOffset = CGSizeMake(-5.0, 5.0);
+    iconlayer.shadowRadius = 5.0;
+    iconlayer.shadowOpacity = 0.6;
+}
+
 @end
 
 

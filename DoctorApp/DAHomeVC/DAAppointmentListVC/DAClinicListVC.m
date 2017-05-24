@@ -8,18 +8,17 @@
 
 #import "DAClinicListVC.h"
 #import "DABookAppointmentVC.h"
+#import "Utils.h"
+
+
 @interface DAClinicTableViewcell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *clicnicImgView;
 @property (weak, nonatomic) IBOutlet UILabel *clicnicNamelbl;
 @property (weak, nonatomic) IBOutlet UILabel *clinicAddressLbl;
-
-
-
+@property (weak, nonatomic) IBOutlet UIView *clinicbackview;
+@property (weak, nonatomic) IBOutlet UIButton *clinicbookbtn;
 @end
 @implementation DAClinicTableViewcell
-
-
-
 @end
 @interface DAClinicListVC ()
 {
@@ -38,13 +37,6 @@
     [self getClinicList];
     // Do any additional setup after loading the view.
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-//TODO: GET APPOINTMENT LIST
 
 -(void)getClinicList
 {
@@ -92,30 +84,21 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     DAClinicTableViewcell *cell = [tableView dequeueReusableCellWithIdentifier:@"DACicnicTableViewcell"];
-    [cell.clicnicNamelbl setText:[[clinicArray  objectAtIndex:indexPath.row] objectForKey:@"clinicName"] ];
-
+    [cell.clicnicNamelbl setText:[[clinicArray  objectAtIndex:indexPath.row] objectForKey:@"clinicName"]];
+    cell.clinicbookbtn.tag = indexPath.row;
+    [cell.clinicbookbtn addTarget:self action:@selector(bookbtnaction:) forControlEvents:UIControlEventTouchUpInside];
+   // [Utils setshadowoffset:cell.clinicbackview];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
-    
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath  *)indexPath
+
+-(void)bookbtnaction:(UIButton *)sender
 {
-    
     DABookAppointmentVC *bokApVc = [self.storyboard instantiateViewControllerWithIdentifier:@"DABookAppointmentVC"];
-    bokApVc.arrayClinicData = [clinicArray  objectAtIndex:indexPath.row];
+    bokApVc.arrayClinicData = [clinicArray  objectAtIndex:sender.tag];
     [self.navigationController showViewController:bokApVc sender:self];
-    NSLog(@"%@",[[clinicArray  objectAtIndex:indexPath.row] objectForKey:@"clinicName"]);
-    
+    NSLog(@"%@",[[clinicArray  objectAtIndex:sender.tag] objectForKey:@"clinicName"]);
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 //TODO:Outlets
 - (IBAction)backBtnTapped:(id)sender
 {

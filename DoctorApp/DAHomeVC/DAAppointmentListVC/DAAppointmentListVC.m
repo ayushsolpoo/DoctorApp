@@ -93,10 +93,10 @@
 {
     DAAppointmentTableViewcell *cell = [tableView dequeueReusableCellWithIdentifier:@"AppointmentTableViewCell"];
     
-    cell.appoimentbackview.layer.shadowColor = [UIColor blackColor].CGColor;
-    cell.appoimentbackview.layer.shadowOffset = CGSizeMake(2, 2);
-    //cell.appoimentbackview.layer.shadowRadius = 5;
-    cell.appoimentbackview.layer.shadowOpacity = 0.3;
+//    cell.appoimentbackview.layer.shadowColor = [UIColor blackColor].CGColor;
+//    cell.appoimentbackview.layer.shadowOffset = CGSizeMake(2, 2);
+//    //cell.appoimentbackview.layer.shadowRadius = 5;
+//    cell.appoimentbackview.layer.shadowOpacity = 0.3;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     [cell.lblDoctorName setText:[[[[appointmentArray  objectAtIndex:indexPath.row] objectForKey:@"patient_appoint_ment_slot"] objectForKey:@"patient_appointment_clinic"] objectForKey:@"clinicName"]];

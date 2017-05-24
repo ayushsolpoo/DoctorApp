@@ -37,17 +37,12 @@
 - (IBAction)backBtnTapped:(id)sender;
 - (IBAction)calenderBtnTapped:(id)sender;
 
-
-
-
 @end
-
-
-
 @implementation DABookAppointmentVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _viewCalender.hidden = NO;
     _arrayOfData = [[NSMutableArray alloc] init];
     headerArray  = [[NSArray alloc]initWithObjects:@"12 Mar 2017",@"13 Mar 2017",@"14 Mar 2017", nil];
     sectionArray = [[NSArray alloc]initWithObjects:@"Morning",@"Afernoon",@"Evening", nil];
@@ -66,7 +61,7 @@
     //calender functions
     _calendarManager = [JTCalendarManager new];
     _calendarManager.delegate = self;
-    _viewCalender.hidden = YES;
+    //_viewCalender.hidden = YES;
     // Generate random events sort by date using a dateformatter for the demonstration
     [self createRandomEvents];
     
@@ -127,7 +122,6 @@
                 lblTimeSlot.textColor = [UIColor greenColor];
             }
         }
-        
     }
 
    
@@ -177,7 +171,7 @@
         }
     }
         dictSelected = [_arrayDataToShow objectAtIndex:indexPath.row];
-    _webViewpayment.hidden = NO;
+    //_webViewpayment.hidden = NO;
     [self makePayment];
   
 
@@ -311,7 +305,7 @@
 }
 -(void)makePayment
 {
-    //self.view.hidden = YES;
+    _webViewpayment.hidden = NO;
     NSString *urlString = [NSString stringWithFormat:@"http://182.73.229.226/make-payment"];
     [_webViewpayment loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]]];
 }
@@ -448,7 +442,7 @@
     [self returnDayId:selectedDate];
     
     //get day of the week
-    _viewCalender.hidden = YES;
+//    _viewCalender.hidden = YES;
     // Animation for the circleView
     dayView.circleView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.1, 0.1);
     [UIView transitionWithView:dayView
@@ -592,6 +586,6 @@
 
 - (IBAction)calenderBtnTapped:(id)sender
 {
-   _viewCalender.hidden = NO;
+//   _viewCalender.hidden = NO;
 }
 @end

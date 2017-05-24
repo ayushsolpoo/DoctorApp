@@ -38,7 +38,7 @@
      [self customSetup];
     sospopupview.hidden = YES;
     slideImageSetArray = [[NSMutableArray alloc]initWithObjects:@"image1",@"image2",@"image3",nil];
-    docallimgarr = [[NSMutableArray alloc]initWithObjects:@"appointment_icon",@"doc_chat_icon",@"token_icon",@"reminder_icon",nil];
+    docallimgarr = [[NSMutableArray alloc]initWithObjects:@"appointment_home_icon",@"doc_chat_icon",@"token_icon",@"reminder_icon",nil];
     docalltextarr = [[NSMutableArray alloc]initWithObjects:@"Appointment",@"Chat With Doctor",@"Token",@"Reminder",nil];
     //---------------------------------------------------------------
     [self setchat];
@@ -121,10 +121,10 @@
     }else if (collectionView == _blockcollectionview)
     {
         //cell._backview.layer.cornerRadius = 15.0;
-        cell._backview.layer.shadowColor = [UIColor blackColor].CGColor;
-        cell._backview.layer.shadowOffset = CGSizeMake(2, 2);
-        cell._backview.layer.shadowRadius = 5;
-        cell._backview.layer.shadowOpacity = 0.3;
+//        cell._backview.layer.shadowColor = [UIColor blackColor].CGColor;
+//        cell._backview.layer.shadowOffset = CGSizeMake(2, 2);
+//        cell._backview.layer.shadowRadius = 5;
+//        cell._backview.layer.shadowOpacity = 0.3;
         cell.appointmentimg.image = [UIImage imageNamed:docallimgarr[indexPath.row]];
         cell.applbl.text = [docalltextarr objectAtIndex:indexPath.row];
         return cell;

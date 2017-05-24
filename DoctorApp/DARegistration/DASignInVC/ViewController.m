@@ -138,18 +138,19 @@
     //device_token,registration_token
     
     [[NetworkManager sharedManager] requestApiWithName:urlString requestType:kHTTPMethodPOST postData:paramDict callBackBlock:^(id response, NSError *error)
-     {
+    {
          NSDictionary *dictionary = nil;;
          if (response)
          {
              dictionary = [[NSDictionary alloc] initWithDictionary:response];
          }
          [SVProgressHUD show];
-         if (!error)
+     if (!error)
+      {
+         if (dictionary)
          {
-             if (dictionary)
-             {
-                 [SVProgressHUD dismiss];
+            [SVProgressHUD dismiss];
+                 
              if ([[dictionary objectForKey:@"message"] isEqualToString:@"Email does not found."])
              {
                  UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Invalid Email id! " message:[dictionary objectForKey:@"reason"] preferredStyle:UIAlertControllerStyleAlert];
@@ -157,18 +158,12 @@
                      // action 1
                  }]];
                  [self presentViewController:alertController animated:YES completion:nil];
-                 }else
+                 }
+             else
                  {
-//                     DAOtpVC *otp = [self.storyboard instantiateViewControllerWithIdentifier:@"DAOtpVC"];
-//                     otp.otpstr = [[dictionary objectForKey:@"data"] objectForKey:@"otp"];
-//                     otp.paisentIDstr = [[dictionary objectForKey:@"data"] objectForKey:@"id"];
-//                     [self.navigationController showViewController:otp sender:self];
-//
              UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Appointment" bundle:nil];
              SWRevealViewController *initialViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"revel"];
                  [self.navigationController pushViewController:initialViewController animated:YES];
-//                 UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:initialViewController];
-//                 self.view.window.rootViewController = nav;
                  }
              }
              else
@@ -177,12 +172,12 @@
                  [self showErrorMessage];
              }
          }
-             else
-             {
-                 [SVProgressHUD dismiss];
-                 [self showErrorMessage:error];
-             }
-     }];
+     else
+      {
+        [SVProgressHUD dismiss];
+        [self showErrorMessage:error];
+      }
+    }];
 }
 
 #pragma mark - Error Methods
