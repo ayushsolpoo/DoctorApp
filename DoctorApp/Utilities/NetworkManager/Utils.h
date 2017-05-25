@@ -28,7 +28,7 @@
 + (void)setPassword:(NSString*)password;
 + (void)setLoggedIntoFloost:(BOOL)val;
 + (BOOL)connected;
-+(void)setshadowoffset:(UIView *)backview;
++(void)setshadowoffset:(UIButton *)btn;
 @end
 
 

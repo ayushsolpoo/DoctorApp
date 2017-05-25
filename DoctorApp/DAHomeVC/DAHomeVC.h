@@ -23,7 +23,16 @@
 #import "CNPPopupController.h"
 
 
-@interface DAHomeVC : UIViewController
-@property(nonatomic,strong) UIActivityIndicatorView *activityView;
+@interface DAHomeVC : UIViewController<CNPPopupControllerDelegate>
+{
+    
+    __weak IBOutlet UIButton *nobtn;
+    __weak IBOutlet UIButton *askquesbtn;
+    __weak IBOutlet UIButton *sosfirstpopuonobtn;
+    __weak IBOutlet UIButton *sosfirstpopupyesbtn;
+    NSInteger popint;
+}
+@property(nonatomic,strong)
+UIActivityIndicatorView *activityView;
 @property (nonatomic, strong) CNPPopupController *popupController;
 @end

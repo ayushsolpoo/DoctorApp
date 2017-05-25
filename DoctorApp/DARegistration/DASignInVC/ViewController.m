@@ -26,7 +26,7 @@
 {
     [super viewDidLoad];
     [self setleftimages];
-    _textFieldEmail.text = @"demo@gmail.com";
+    _textFieldEmail.text = @"wang@gmail.com";
     _textFieldPas.text = @"123456789";
 }
 
@@ -59,13 +59,13 @@
 
 -(void)setleftimages
 {
-    _emailTextField.leftViewMode = UITextFieldViewModeAlways;
-    _emailTextField.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"email_icon.png"]];
-    
-    _pasTextField.leftViewMode = UITextFieldViewModeAlways;
-    _pasTextField.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"password_icon.png"]];
-     _emailTextField.layer.sublayerTransform = CATransform3DMakeTranslation(0, 0, 0);
-     _pasTextField.layer.sublayerTransform = CATransform3DMakeTranslation(0, 0, 0);
+//    _emailTextField.leftViewMode = UITextFieldViewModeAlways;
+//    _emailTextField.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"email_icon.png"]];
+//    
+//    _pasTextField.leftViewMode = UITextFieldViewModeAlways;
+//    _pasTextField.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"password_icon.png"]];
+     _emailTextField.layer.sublayerTransform = CATransform3DMakeTranslation(20, 0, 0);
+     _pasTextField.layer.sublayerTransform = CATransform3DMakeTranslation(20, 0, 0);
     
     submitbutton.layer.cornerRadius = 15.0;
     submitbutton.layer.shadowColor = [UIColor blackColor].CGColor;

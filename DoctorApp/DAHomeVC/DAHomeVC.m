@@ -15,13 +15,15 @@
 #import "DAReminderVC.h"
 #import "DAReminderDetailVC.h"
 #import "DAChatVC.h"
+#import "Utils.h"
 
 @interface DAHomeVC ()<UICollectionViewDelegate,UICollectionViewDataSource>
 {
-    NSMutableArray *slideImageSetArray;
-    NSMutableArray *docallimgarr;
-    NSMutableArray *docalltextarr;
-    __weak IBOutlet UIView *sospopupview;
+    NSMutableArray              *slideImageSetArray;
+    NSMutableArray              *docallimgarr;
+    NSMutableArray              *docalltextarr;
+    __weak IBOutlet UIView      *sospopupview;
+    __weak IBOutlet UIView      *sosfirstpopup;
     
 }
 @property (nonatomic) IBOutlet UIButton* revealButtonItem;
@@ -37,6 +39,7 @@
     [super viewDidLoad];
      [self customSetup];
     sospopupview.hidden = YES;
+    sosfirstpopup.hidden = YES;
     slideImageSetArray = [[NSMutableArray alloc]initWithObjects:@"image1",@"image2",@"image3",nil];
     docallimgarr = [[NSMutableArray alloc]initWithObjects:@"appointment_home_icon",@"doc_chat_icon",@"token_icon",@"reminder_icon",nil];
     docalltextarr = [[NSMutableArray alloc]initWithObjects:@"Appointment",@"Chat With Doctor",@"Token",@"Reminder",nil];
@@ -46,6 +49,10 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
+    [Utils setshadowoffset:nobtn];
+    [Utils setshadowoffset:askquesbtn];
+    [Utils setshadowoffset:sosfirstpopuonobtn];
+    [Utils setshadowoffset:sosfirstpopupyesbtn];
     //--------------------------------------------------------------
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userUpdate:) name:@"userUpdate" object:nil];
@@ -64,12 +71,12 @@
     }
 
  //-------------------------------------------------------------------------
-    
     self.navigationController.navigationBar.hidden = YES;
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
     [tracker set:kGAIScreenName value:@"HOme Screen"];
     [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
 }
+
 
 // TODO: collection view data source methods
 #pragma Mark:-
@@ -281,9 +288,9 @@
 
 #pragma mark:-
 #pragma Mark openpopup:::---
-- (IBAction)popupbuttonaction:(id)sender
+- (IBAction)popupbuttonaction:(UIButton *)sender
 {
-    //popint = sender.tag;
+    popint = sender.tag;
     [self showPopupWithStyle:CNPPopupStyleCentered];
 }
 
@@ -292,13 +299,25 @@
 
 - (void)showPopupWithStyle:(CNPPopupStyle)popupStyle
 {
-sospopupview.hidden = NO;
-self.popupController = [[CNPPopupController alloc] initWithContents:@[sospopupview]];
-self.popupController.theme = [CNPPopupTheme defaultTheme];
-self.popupController.theme.popupStyle = popupStyle;
-self.popupController.delegate = self;
-[self.popupController presentPopupControllerAnimated:YES];
-    
+    if (popint == 1)
+    {
+        sospopupview.hidden = NO;
+   self.popupController = [[CNPPopupController alloc] initWithContents:@[sospopupview]];
+    self.popupController.theme = [CNPPopupTheme defaultTheme];
+    self.popupController.theme.popupStyle = popupStyle;
+    self.popupController.delegate = self;
+    [self.popupController presentPopupControllerAnimated:YES];
+    }
+    else if(popint == 0)
+    {
+    [self.popupController dismissPopupControllerAnimated:YES];
+    sosfirstpopup.hidden = NO;
+    self.popupController = [[CNPPopupController alloc] initWithContents:@[sosfirstpopup]];
+    self.popupController.theme = [CNPPopupTheme defaultTheme];
+    self.popupController.theme.popupStyle = popupStyle;
+    self.popupController.delegate = self;
+    [self.popupController presentPopupControllerAnimated:YES];
+    }
 }
 
 
@@ -576,5 +595,14 @@ self.popupController.delegate = self;
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:@"userUpdate"];
+}
+- (IBAction)sosyesbuttonAction:(UIButton *)sender
+{
+    popint = sender.tag;
+    [self.popupController dismissPopupControllerAnimated:YES];
+    [self showPopupWithStyle:CNPPopupStyleCentered];
+}
+- (IBAction)askquesbtnaction:(id)sender {
+    [self.popupController dismissPopupControllerAnimated:YES];
 }
 @end

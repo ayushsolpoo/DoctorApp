@@ -27,12 +27,16 @@
     NSString *currdate;
     NSString *getnoofdays;
     SACalendar *calendar;
+    BOOL checkBoxSelected;
+    
+    __weak IBOutlet UIButton *_addreminderbtn;
     
     __weak IBOutlet UICollectionView *_timecollectionview;
     __weak IBOutlet UITextField      *_timeslotfield;
     __weak IBOutlet UITextField      *textfielddate;
     __weak IBOutlet UITextField      *textfieldmonths;
 
+    __weak IBOutlet UIButton *checkboxbtn;
 }
 @property (weak, nonatomic) IBOutlet UIView *_alldate_timeview;
 @property (strong, nonatomic) JTCalendarManager *calendarManager;

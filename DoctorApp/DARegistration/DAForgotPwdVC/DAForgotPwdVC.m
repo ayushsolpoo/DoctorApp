@@ -16,22 +16,27 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.navigationController.navigationBar.hidden = YES;
+    
+    _sendbtn.layer.cornerRadius = 15.0;
+    _sendbtn.layer.shadowColor = [UIColor blackColor].CGColor;
+    _sendbtn.layer.shadowOffset = CGSizeMake(3, 3);
+    _sendbtn.layer.shadowRadius = 5;
+    _sendbtn.layer.shadowOpacity = 0.3;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (IBAction)backbuttonAction:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
-*/
+
+- (IBAction)sendbuttonaction:(id)sender
+{
+    NSLog(@"jvj");
+}
 
 @end

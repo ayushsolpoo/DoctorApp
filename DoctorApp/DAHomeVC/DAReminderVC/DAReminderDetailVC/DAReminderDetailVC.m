@@ -50,19 +50,22 @@
     [_calendarManager setMenuView:_calendarMenuView];
     [_calendarManager setContentView:_calendarContentView];
     [_calendarManager setDate:_todayDate];
+    
+    
+    //setbutton shadow....
+    _addreminderbtn.layer.cornerRadius = 15.0;
+    _addreminderbtn.layer.shadowColor = [UIColor blackColor].CGColor;
+    _addreminderbtn.layer.shadowOffset = CGSizeMake(3, 3);
+    _addreminderbtn.layer.shadowRadius = 5;
+    _addreminderbtn.layer.shadowOpacity = 0.3;
 
     // Do any additional setup after loading the view.
 }
 
 -(void)setshadow
 {
-    _timeslotfield.layer.borderColor=[[UIColor lightGrayColor]CGColor];
-    _timeslotfield.layer.borderWidth=1.0;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+//    _timeslotfield.layer.borderColor=[[UIColor lightGrayColor]CGColor];
+//    _timeslotfield.layer.borderWidth=1.0;
 }
 //TODO:Textfield delegates
 -(BOOL) textFieldShouldReturn:(UITextField *)textField
@@ -543,6 +546,29 @@
     NSString *dateString = [outputFormatter stringFromDate:picker.date];
     _timeslotfield.text = [NSString stringWithFormat:@"%@",dateString];
 }
+
+#pragma Mark:-
+#pragma Mark checkboxbutton:-
+- (IBAction)checkbuttonaction:(id)sender
+{
+   //checkBoxSelected = YES;
+    [checkboxbtn setBackgroundImage:[UIImage imageNamed:@"check_box_outline_icon.png"]
+                        forState:UIControlStateNormal];
+    [checkboxbtn setBackgroundImage:[UIImage imageNamed:@"check_box_fill_icon.png"]
+                        forState:UIControlStateSelected];
+    [checkboxbtn setBackgroundImage:[UIImage imageNamed:@"check_box_fill_icon.png"]
+                        forState:UIControlStateHighlighted];
+    checkboxbtn.adjustsImageWhenHighlighted=YES;
+    [checkboxbtn addTarget:self action:@selector(checkboxSelected:) forControlEvents:UIControlEventTouchUpInside];
+    
+}
+
+-(void)checkboxSelected:(id)sender
+{
+    checkBoxSelected = !checkBoxSelected; /* Toggle */
+    [checkboxbtn setSelected:checkBoxSelected];
+}
+
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {

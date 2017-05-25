@@ -365,9 +365,9 @@ bool keyboardIsShown = false;
 - (NSString *)validateForm {
     NSString *errorMessage = nil;
     
-    
-    NSString *regex = @"[^@]+@[A-Za-z0-9.-]+\\.[A-Za-z]+";
-    NSPredicate *emailPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+//    
+//    NSString *regex = @"[^@]+@[A-Za-z0-9.-]+\\.[A-Za-z]+";
+//    NSPredicate *emailPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
     
     //    if (!([_titleTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""].length >= 1)) {
     //        errorMessage = @"Please enter Your Title name";
@@ -393,9 +393,9 @@ bool keyboardIsShown = false;
     }
     
     //else if (![emailPredicate evaluateWithObject:_loginUserIDTextfield.text]){
-    else if(![emailPredicate evaluateWithObject:_textFieldEmail]){
-        errorMessage = @"Please enter a valid email address";
-    }
+//    else if(![emailPredicate evaluateWithObject:_textFieldEmail]){
+//        errorMessage = @"Please enter a valid email address";
+//    }
     
       return errorMessage;
 }

@@ -86,14 +86,15 @@
 	return !(netStatus == NotReachable);
 }
 
-+(void)setshadowoffset:(UIView *)backview
++(void)setshadowoffset:(UIButton *)btn
 {
-    CALayer *iconlayer = backview.layer;
-    iconlayer.masksToBounds = NO;
-    iconlayer.cornerRadius = 8.0;
-    iconlayer.shadowOffset = CGSizeMake(-5.0, 5.0);
-    iconlayer.shadowRadius = 5.0;
-    iconlayer.shadowOpacity = 0.6;
+    btn.layer.cornerRadius = 15.0;
+    btn.layer.shadowColor = [UIColor blackColor].CGColor;
+    btn.layer.shadowOffset = CGSizeMake(3, 3);
+    btn.layer.shadowRadius = 5;
+    btn.layer.shadowOpacity = 0.3;
+    
+
 }
 
 @end

@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface DAForgotPwdVC : UIViewController
+{
+    
+    __weak IBOutlet UITextField *_mobilenofield;
+    __weak IBOutlet UIButton *_sendbtn;
+}
 
 @end
