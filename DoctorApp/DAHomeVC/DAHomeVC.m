@@ -40,7 +40,7 @@
      [self customSetup];
     sospopupview.hidden = YES;
     sosfirstpopup.hidden = YES;
-    slideImageSetArray = [[NSMutableArray alloc]initWithObjects:@"image1",@"image2",@"image3",nil];
+    slideImageSetArray = [[NSMutableArray alloc]initWithObjects:@"home_ads_image.png",@"home_ads_image.png",@"home_ads_image.png",nil];
     docallimgarr = [[NSMutableArray alloc]initWithObjects:@"appointment_home_icon",@"doc_chat_icon",@"token_icon",@"reminder_icon",nil];
     docalltextarr = [[NSMutableArray alloc]initWithObjects:@"Appointment",@"Chat With Doctor",@"Token",@"Reminder",nil];
     //---------------------------------------------------------------
@@ -308,7 +308,7 @@
     self.popupController.delegate = self;
     [self.popupController presentPopupControllerAnimated:YES];
     }
-    else if(popint == 0)
+    else 
     {
     [self.popupController dismissPopupControllerAnimated:YES];
     sosfirstpopup.hidden = NO;

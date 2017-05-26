@@ -21,12 +21,6 @@
 @property (weak, nonatomic) IBOutlet UISearchBar *contactSearchBar;
 - (IBAction)btnReselectPressed:(id)sender;
 - (IBAction)btnSvaePressed:(id)sender;
-
-
-
-
-
-
 @end
 
 @implementation DAEmergencyContactsVC

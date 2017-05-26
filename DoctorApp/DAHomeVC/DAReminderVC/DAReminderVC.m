@@ -22,7 +22,7 @@
 }
 - (IBAction)backBtnTapped:(id)sender;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentmediLab;
-@property (weak, nonatomic) IBOutlet UITableView *tableViewReminderList;
+@property (weak, nonatomic) IBOutlet UITableView        *tableViewReminderList;
 
 - (IBAction)segmentValueChanged:(id)sender;
 

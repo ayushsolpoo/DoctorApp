@@ -16,7 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *clicnicNamelbl;
 @property (weak, nonatomic) IBOutlet UILabel *clinicAddressLbl;
 @property (weak, nonatomic) IBOutlet UIView *clinicbackview;
-@property (weak, nonatomic) IBOutlet UIButton *clinicbookbtn;
+@property (strong, nonatomic) IBOutlet UIButton *clinicbookbtn;
 @end
 @implementation DAClinicTableViewcell
 @end
@@ -35,6 +35,7 @@
     [super viewDidLoad];
     clinicArray = [[NSMutableArray alloc]initWithCapacity:0];
     [self getClinicList];
+    
     // Do any additional setup after loading the view.
 }
 
@@ -85,6 +86,7 @@
 {
     DAClinicTableViewcell *cell = [tableView dequeueReusableCellWithIdentifier:@"DACicnicTableViewcell"];
     [cell.clicnicNamelbl setText:[[clinicArray  objectAtIndex:indexPath.row] objectForKey:@"clinicName"]];
+    [Utils setshadowoffset:cell.clinicbookbtn];
     cell.clinicbookbtn.tag = indexPath.row;
     [cell.clinicbookbtn addTarget:self action:@selector(bookbtnaction:) forControlEvents:UIControlEventTouchUpInside];
    // [Utils setshadowoffset:cell.clinicbackview];

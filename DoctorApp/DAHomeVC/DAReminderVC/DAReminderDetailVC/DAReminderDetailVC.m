@@ -28,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnDate;
 - (IBAction)backBtnTapped:(id)sender;
 - (IBAction)btnChangeDateTapped:(id)sender;
+@property (weak, nonatomic) IBOutlet UITextField *choosedatebtn;
 
 @end
 
@@ -154,7 +155,8 @@
     [offsetComponents setDay:1];
     NSDate *nextDate = [gregorian dateByAddingComponents:offsetComponents toDate: _dateSelected options:0];
     NSString *finalDate = [NSString stringWithFormat:@"%@",nextDate];
-    [_btnDate setTitle:finalDate forState:UIControlStateNormal];
+    _choosedatebtn.text = finalDate;
+    //[_btnDate setTitle:finalDate forState:UIControlStateNormal];
     
     
     //get day of the week
@@ -304,7 +306,8 @@
 {
     NSLog(@"Date Selected : %02i/%02i/%04i",day,month,year);
     datestring = [NSString stringWithFormat:@"%02i-%02i-%04i",day,month,year];
-    [_btnDate setTitle:[NSString stringWithFormat:@"%@", datestring] forState:UIControlStateNormal];
+    _choosedatebtn.text = datestring;
+    //[_btnDate setTitle:[NSString stringWithFormat:@"%@", datestring] forState:UIControlStateNormal];
 }
 
 /**
@@ -368,8 +371,45 @@
   }
 
 
+
+#pragma Mark:
+#pragma Mark AllTextField Validations:-
+
+- (NSString *)validateForm {
+    NSString *errorMessage = nil;
+   
+    if (!(_txtFieldMedicineName.text.length >= 1)){
+        errorMessage = @"Please Enter Your Medician Name";
+    }
+    
+    else if (!(_choosedatebtn.text.length >= 1)){
+        errorMessage = @"Please enter Your Date";
+    }
+    else if (!(_txtFieldNumberOfDays.text.length >= 1)){
+        errorMessage = @"Please enter Your No of days";
+    }
+    else if (!(_timeslotfield.text.length >= 1)){
+        errorMessage = @"Please enter Your Time";
+    }
+
+    return errorMessage;
+}
+
+
+
+
 - (IBAction)addreminderbutton:(id)sender {
     
+    NSString *errorMessage = [self validateForm];
+    if (errorMessage)
+    {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Meassage" message:errorMessage delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+        [alert show];
+        return;
+    }
+    else
+    {
+
     // save record....
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
@@ -407,6 +447,7 @@
     }];
     
      [NSTimer scheduledTimerWithTimeInterval:20 target:self selector:@selector(myTimerTick) userInfo:nil repeats:YES]; // the interval is in seconds...
+    }
   }
 
 #pragma mark:-
