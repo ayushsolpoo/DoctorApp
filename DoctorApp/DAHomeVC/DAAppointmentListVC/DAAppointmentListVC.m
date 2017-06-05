@@ -35,6 +35,7 @@
 @implementation DAAppointmentListVC
 
 - (void)viewDidLoad {
+    mainview.backgroundColor = bgcolor;
     [super viewDidLoad];
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
     appointmentArray = [[NSMutableArray alloc]initWithCapacity:0];

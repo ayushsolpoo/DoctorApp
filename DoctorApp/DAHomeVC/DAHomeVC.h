@@ -26,6 +26,7 @@
 @interface DAHomeVC : UIViewController<CNPPopupControllerDelegate>
 {
     
+    __weak IBOutlet UIView *mainview;
     __weak IBOutlet UIButton *nobtn;
     __weak IBOutlet UIButton *askquesbtn;
     __weak IBOutlet UIButton *sosfirstpopuonobtn;

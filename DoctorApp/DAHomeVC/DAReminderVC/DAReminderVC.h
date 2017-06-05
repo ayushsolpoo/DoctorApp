@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface DAReminderVC : UIViewController<UITableViewDelegate,UITableViewDataSource>
-
+{
+    
+    __weak IBOutlet UIView *mainview;
+}
 @end

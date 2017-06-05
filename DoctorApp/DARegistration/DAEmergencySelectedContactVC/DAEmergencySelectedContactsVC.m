@@ -46,7 +46,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *contactCell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"solpoo"];
-    [contactCell.textLabel       setText:[_contactsArray[indexPath.row] valueForKey:@"fullName"]];
+    [contactCell.textLabel setText:[_contactsArray[indexPath.row] valueForKey:@"fullName"]];
     [contactCell.detailTextLabel setText:[[_contactsArray[indexPath.row] valueForKey:@"PhoneNumbers"] objectAtIndex:0]];
     
     return contactCell;

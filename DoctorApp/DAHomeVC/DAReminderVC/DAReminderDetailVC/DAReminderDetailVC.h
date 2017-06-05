@@ -14,6 +14,8 @@
 
 @interface DAReminderDetailVC : UIViewController<DropDownDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UITextFieldDelegate>
 {
+    
+    __weak IBOutlet UIView *mainview;
     DropDownClass                    *_duratioDropDown;
     NSArray                          *_durationtimeArray;
     NSMutableArray                   *_addtimearray;

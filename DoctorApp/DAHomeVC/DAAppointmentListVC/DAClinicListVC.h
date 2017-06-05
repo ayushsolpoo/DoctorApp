@@ -11,6 +11,7 @@
 @interface DAClinicListVC : UIViewController
 {
     
+    __weak IBOutlet UIView *mainview;
 }
 
 @end

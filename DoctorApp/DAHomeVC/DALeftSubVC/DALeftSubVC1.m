@@ -16,7 +16,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    arr = [[NSArray alloc]initWithObjects:@"PROFILE",@"SEARCH PHARMACY STORE",@"INVITE FRIEND AND FAMILY",@"PAYMENT",@"ABOUT APP",@"HELP",@"SETTINGS", nil];
+    titaleArray = [[NSArray alloc]initWithObjects:@"PROFILE",@"SEARCH PHARMACY STORE",@"INVITE FRIEND AND FAMILY",@"PAYMENT",@"ABOUT APP",@"HELP",@"SETTINGS", nil];
+    
+    imageArray = [[NSArray alloc]initWithObjects:[UIImage imageNamed:@"profile_icon.png"],[UIImage imageNamed:@"store_icon.png"],[UIImage imageNamed:@"invite_icon.png"],[UIImage imageNamed:@"payment_icon.png"],[UIImage imageNamed:@"about_icon.png"],[UIImage imageNamed:@"help_icon.png"],[UIImage imageNamed:@"setting_icon"], nil];
 }
 
 #pragma mark - Table view data source
@@ -28,17 +30,17 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return arr.count;
+    return titaleArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
-    cell.textLabel.text = [arr objectAtIndex:indexPath.row];
+    cell.textLabel.text = [titaleArray objectAtIndex:indexPath.row];
     cell.textLabel.font = [UIFont systemFontOfSize:14.0];
     cell.backgroundColor = [UIColor clearColor];
     cell.textLabel.textColor = [UIColor whiteColor];
-    cell.imageView.image = [UIImage imageNamed:@"mobile_icon.png"];
+    cell.imageView.image = [imageArray objectAtIndex:indexPath.row];
     return cell;
 }
 

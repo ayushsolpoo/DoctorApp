@@ -42,7 +42,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _viewCalender.hidden = NO;
+    mainview.backgroundColor = bgcolor;
+    _viewCalender.hidden = YES;
     _arrayOfData = [[NSMutableArray alloc] init];
     headerArray  = [[NSArray alloc]initWithObjects:@"12 Mar 2017",@"13 Mar 2017",@"14 Mar 2017", nil];
     sectionArray = [[NSArray alloc]initWithObjects:@"Morning",@"Afernoon",@"Evening", nil];
@@ -98,9 +99,6 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init] ;
     [dateFormatter setDateFormat:@"dd-MM-yyyy"];
     NSString *selectedDate = [dateFormatter stringFromDate:_dateSelected];
-    
-    
-    
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init] ;
    
     
@@ -432,7 +430,7 @@
     NSDate *nextDate = [gregorian dateByAddingComponents:offsetComponents toDate: _dateSelected options:0];
      NSString *finalDate = [NSString stringWithFormat:@"%@",nextDate];
     [_btnTodaysDate setTitle:finalDate forState:UIControlStateNormal];
-    
+    _viewCalender.hidden = YES;
     
     //get day of the week
     
@@ -583,6 +581,15 @@
         [_eventsByDate[key] addObject:randomDate];
     }
 }
+
+#pragma Mark:-
+#pragma mark open calender
+- (IBAction)openbtncalender:(id)sender {
+    
+    _viewCalender.hidden = NO;
+}
+
+
 
 - (IBAction)calenderBtnTapped:(id)sender
 {

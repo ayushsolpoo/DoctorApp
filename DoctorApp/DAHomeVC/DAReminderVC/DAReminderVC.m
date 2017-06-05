@@ -32,6 +32,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    mainview.backgroundColor = bgcolor;
     arrayDataToLoad = [[NSMutableArray alloc] init];
     self.navigationController.navigationBar.hidden = YES;
     

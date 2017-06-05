@@ -32,6 +32,7 @@
 
 - (void)viewDidLoad
 {
+    mainview.backgroundColor = bgcolor;
     [super viewDidLoad];
     clinicArray = [[NSMutableArray alloc]initWithCapacity:0];
     [self getClinicList];
@@ -86,7 +87,7 @@
 {
     DAClinicTableViewcell *cell = [tableView dequeueReusableCellWithIdentifier:@"DACicnicTableViewcell"];
     [cell.clicnicNamelbl setText:[[clinicArray  objectAtIndex:indexPath.row] objectForKey:@"clinicName"]];
-    [Utils setshadowoffset:cell.clinicbookbtn];
+    //[Utils setshadowoffset:cell.clinicbookbtn];
     cell.clinicbookbtn.tag = indexPath.row;
     [cell.clinicbookbtn addTarget:self action:@selector(bookbtnaction:) forControlEvents:UIControlEventTouchUpInside];
    // [Utils setshadowoffset:cell.clinicbackview];

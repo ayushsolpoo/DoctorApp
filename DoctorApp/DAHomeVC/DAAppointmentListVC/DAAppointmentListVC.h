@@ -8,5 +8,8 @@
 
 #import <UIKit/UIKit.h>
 @interface DAAppointmentListVC : UIViewController
-
+{
+    
+    __weak IBOutlet UIView *mainview;
+}
 @end

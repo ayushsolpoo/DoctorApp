@@ -10,7 +10,8 @@
 
 @interface DALeftSubVC1 : UIViewController<UITableViewDelegate,UITableViewDataSource>
 {
-    NSArray *arr;
+    NSArray *titaleArray;
+    NSArray *imageArray;
 }
 
 @end

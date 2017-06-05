@@ -16,6 +16,7 @@
 #import "DAReminderDetailVC.h"
 #import "DAChatVC.h"
 #import "Utils.h"
+#import "Constant.h"
 
 @interface DAHomeVC ()<UICollectionViewDelegate,UICollectionViewDataSource>
 {
@@ -37,6 +38,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [mainview setBackgroundColor:bgcolor];
      [self customSetup];
     sospopupview.hidden = YES;
     sosfirstpopup.hidden = YES;
@@ -270,7 +272,7 @@
     [ALUserDefaultsHandler setUserId:user.userId];
     [ALUserDefaultsHandler setEmailId:user.email];
     [ALUserDefaultsHandler setPassword:user.password];
-    ALChatManager * chatManager = [[ALChatManager alloc] initWithApplicationKey:@"ebf0c93861f3349ed3f748d3c198cd92"];
+    ALChatManager *chatManager = [[ALChatManager alloc] initWithApplicationKey:@"ebf0c93861f3349ed3f748d3c198cd92"];
     [chatManager registerUserWithCompletion:user withHandler:^(ALRegistrationResponse *rResponse, NSError *error) {
         
         if (!error)

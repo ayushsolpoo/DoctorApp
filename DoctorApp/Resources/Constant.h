@@ -32,4 +32,7 @@
 #define SAVED_CONTACTS        @"You have successfully saved the selected contacts."
 #define kAppName              @"DoctorApp"
 
+
+#define   bgcolor                 [UIColor colorWithRed:0/255.0 green:140/255.0 blue:207/255.0 alpha:1]
+
 #endif /* Constant_h */

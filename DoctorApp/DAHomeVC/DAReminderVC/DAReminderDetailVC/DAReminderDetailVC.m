@@ -37,6 +37,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    mainview.backgroundColor = bgcolor;
+    _addreminderbtn.backgroundColor = bgcolor;
     _todayDate = [NSDate date];
     _addtimearray = [[NSMutableArray alloc]init];
      a   = [[NSMutableArray alloc]init];
@@ -616,4 +618,5 @@
     calendar.hidden = YES;
     return YES;
 }
+
 @end
